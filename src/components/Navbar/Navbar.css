@@ -1,0 +1,25 @@
+.navContainer{
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    height: fit-content;
+}
+
+.navList{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-evenly;
+}
+.navItems{
+    display: flex;
+    flex-direction: row;
+   
+}
+p{
+    margin: 0;
+}
+img{
+    padding-right: 1rem;
+}

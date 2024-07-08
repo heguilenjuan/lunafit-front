@@ -1,0 +1,22 @@
+.headerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.infoGeneral {
+    margin: 0 auto;
+    padding-block: 1rem;
+}
+
+mark {
+    background-color: transparent;
+    color: green;
+    font-size: 800;
+}
+
+.logo {
+    width: 200px;
+    height: 200px;
+}

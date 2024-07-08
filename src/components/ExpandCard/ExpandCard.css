@@ -1,0 +1,47 @@
+.expandCard {
+    padding: 2rem 8rem;
+}
+
+.containerCard {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    background-color: #FFF;
+    padding: 5rem;
+    border-radius: 10px;
+    height: 80vh;
+}
+
+.boxImageCard {
+    display: flex;
+    flex-direction: column;
+    width: 60%;
+}
+.ruteCard{
+    font-size: 20px;
+    font-weight: 600;
+}
+.boxImage{
+    display: flex;
+    flex-direction: row;
+
+}
+.listImage{
+    display: flex;
+    flex-direction: column;
+}
+.selectImage{
+    width: 120px;
+    height: 120px;
+    border-radius: 5px;
+}
+.imageSelected{
+    width: 500px;
+    height: 500px;
+    border-radius: 5px;
+}
+
+.boxInfoCard {
+    display: flex;
+    flex-direction: column;
+}
