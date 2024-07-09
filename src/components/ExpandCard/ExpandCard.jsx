@@ -48,7 +48,7 @@ const ExpandCard = () => {
                         </div>
                     </div>
                     
-                  <button className='btnConsult'>Consultanos</button>
+                  <button className='btnConsult'> <img src="/icons/whatsapp.svg" alt="iconWhatsapp" width={20} height={20} className='iconFill' />Consultanos</button>
                 </div>
             </div>
         </main>
