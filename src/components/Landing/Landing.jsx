@@ -1,9 +1,9 @@
-import Card from '../Card/Card'
+import AllProduct from '../sections/AllProduct/AllProduct'
 
 const Landing = () => {
   return (
     <main>
-        <Card/>
+        <AllProduct/>
     </main>
   )
 }

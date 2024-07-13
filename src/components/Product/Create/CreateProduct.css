@@ -1,0 +1,24 @@
+.containerForm{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    padding-block: 2rem;
+}
+
+.boxForm{
+    padding: 2rem;
+    background-color: #ffff;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center ;
+    width: 40%;
+}
+
+.input{
+    height: 3rem;
+    width: 25rem;
+    margin-block-end: 2rem;
+}
