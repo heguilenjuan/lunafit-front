@@ -1,0 +1,15 @@
+.bannerSection{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+.imageBanner{
+    max-width: 100%;
+    height: auto;
+    padding-inline: 2rem;
+}
+.imageBanner:hover{
+    opacity: 80%;
+    cursor: pointer;
+}

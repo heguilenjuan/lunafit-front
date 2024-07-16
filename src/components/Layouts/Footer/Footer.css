@@ -7,14 +7,6 @@
     justify-content: space-between;
 }
 
-.firstPart{
-    display: flex;
-    flex-direction: row;
-    width: 60%;
-    align-items: center;
-    justify-content: space-between;
-    margin:0 auto;
-}
 
 .infoFooter{
     background-color: black;
@@ -24,5 +16,5 @@
     flex-direction: row;
     justify-content: space-between;
     align-items: center;
-    padding: 0 3rem;
+    padding: 0 5rem;
 }

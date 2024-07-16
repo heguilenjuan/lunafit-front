@@ -1,4 +1,4 @@
-.navContainer{
+.navContainer {
     height: 5rem;
     display: flex;
     align-items: center;
@@ -6,20 +6,32 @@
     height: fit-content;
 }
 
-.navList{
+.navList {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
 }
-.navItems{
+
+.navItems {
     display: flex;
     flex-direction: row;
-   
+
 }
-p{
+
+p {
     margin: 0;
 }
-img{
+
+img {
     padding-right: 1rem;
+}
+
+li {
+    cursor: pointer;
+}
+
+li:hover {
+    transition: 0.5s;
+    opacity: 50%;
 }

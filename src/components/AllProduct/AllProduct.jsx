@@ -1,7 +1,9 @@
 import { useEffect } from "react";
 import { useState } from "react"
-import Card from '../../Product/Card/Card'
-const AllProduct = () => {
+import Card from '../Product/Card/Card'
+
+import './AllProduct.css'
+const AllProducts = () => {
     const [products, setProducts] = useState([]);
 
     useEffect(() => {
@@ -29,12 +31,12 @@ const AllProduct = () => {
     }, [])
 
     return (
-        <div>
+        <section className="allProductContainer">
             {products.map((product, index) => (
                 <Card key={index} data={product} />
             ))}
-        </div>
+        </section>
     )
 }
 
-export default AllProduct
+export default AllProducts
