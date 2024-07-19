@@ -9,7 +9,6 @@ const Landing = () => {
         <Link to={'/products'}>
           <img src="/bannerProduct.png" alt="bannerProduct" className="imageBanner" />
         </Link>
-        
       </div>
     </main>
   )

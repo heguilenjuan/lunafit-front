@@ -1,9 +1,10 @@
+/* General Styles */
 .navContainer {
-    height: 5rem;
     display: flex;
     align-items: center;
     width: 100%;
     height: fit-content;
+    padding-block: 1rem;
 }
 
 .navList {
@@ -11,27 +12,61 @@
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
+    list-style: none; /* Remover estilo de lista */
+    padding: 0; /* Remover padding */
+    margin: 0; /* Remover margen */
 }
 
 .navItems {
     display: flex;
     flex-direction: row;
-
+    align-items: center; /* Alinear verticalmente */
+    text-decoration: none; /* Remover subrayado en links */
 }
 
 p {
     margin: 0;
+    padding-left: 0.5rem; /* Agregar espacio entre icono y texto */
+    color: inherit; /* Heredar color del link */
 }
 
 img {
-    padding-right: 1rem;
+    padding-right: 0.5rem; /* Ajustar espacio entre icono y texto */
 }
 
 li {
     cursor: pointer;
+    list-style: none; /* Remover estilo de lista */
 }
 
 li:hover {
     transition: 0.5s;
     opacity: 50%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navList {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navItems {
+        padding: 0.5rem 0; /* Agregar padding vertical para separación entre elementos */
+    }
+}
+
+@media (max-width: 480px) {
+    .navContainer {
+        padding: 0 1rem; /* Reducir padding en dispositivos más pequeños */
+    }
+
+    p {
+        font-size: 0.9rem; /* Reducir tamaño de texto */
+    }
+
+    img {
+        width: 12px; /* Reducir tamaño de icono */
+        height: 12px;
+    }
 }
