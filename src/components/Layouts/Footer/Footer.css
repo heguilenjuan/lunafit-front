@@ -1,4 +1,4 @@
-.boxFooter{
+.boxFooter {
     height: 40vh;
     background-color: #fff;
     border-radius: 15px;
@@ -7,47 +7,49 @@
     justify-content: space-between;
 }
 
-.networksFooter{
+.networksFooter {
     width: auto;
     display: flex;
     flex-direction: row;
-    justify-content:space-around;
-    padding: 1rem 10rem;
+    justify-content: space-around;
+    padding-block: 1rem;
 }
 
-.boxContactFooter{
+.boxContactFooter {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    
+
 }
-.listContactFooter{
+
+.listContactFooter {
     padding: 0;
     margin: 0;
     width: 100%;
-    
+
 }
 
-.itemListFooter{
+.itemListFooter {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: flex-start;
     padding-block: 0.4rem;
     gap: 0.3rem;
-   
+
 }
-.boxPayFooter{
+
+.boxPayFooter {
     display: flex;
     flex-direction: column;
     align-items: center;
 }
 
-.infoFooter{
+.infoFooter {
     background-color: black;
     height: 3rem;
-    
+
     color: white;
     display: flex;
     flex-direction: row;
@@ -55,3 +57,22 @@
     align-items: center;
     padding: 0 5rem;
 }
+
+
+@media screen and (max-width: 480px) {
+   .infoFooter{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: auto;
+    padding: 0.5rem;
+   }
+
+   .textFooter{
+    font-size: 0.7rem;
+    padding: 0;
+    border-top: 1px solid white;
+    padding-block: 0.3rem;
+   }
+}
+

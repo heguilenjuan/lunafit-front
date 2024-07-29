@@ -12,3 +12,13 @@
 .thumbs{
     display: none;
 }
+.carousel .slide{
+    margin-inline: 0.2rem;
+}
+@media (max-width:480px) {
+
+    .section-carrousel{
+        max-width: 100%;
+    }
+    
+}

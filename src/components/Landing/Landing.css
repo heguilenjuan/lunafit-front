@@ -17,3 +17,10 @@
     cursor: pointer;
   }
   
+  @media (max-width:480px) {
+
+    .bannerSection{
+      padding: 0;
+    }
+    
+  }

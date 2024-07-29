@@ -30,10 +30,6 @@ p {
     color: inherit; /* Heredar color del link */
 }
 
-img {
-    padding-right: 0.5rem; /* Ajustar espacio entre icono y texto */
-}
-
 li {
     cursor: pointer;
     list-style: none; /* Remover estilo de lista */
@@ -57,16 +53,21 @@ li:hover {
 }
 
 @media (max-width: 480px) {
-    .navContainer {
-        padding: 0 1rem; /* Reducir padding en dispositivos más pequeños */
+    .navList{
+        margin: 0 auto;
+        width: 45%;
+        align-items: flex-start;
     }
-
+    .navItems{
+        padding: 1rem 0.5rem;
+    }
+    .navContainer{
+        padding: 0;
+        width: fit-content;
+        
+    }
     p {
         font-size: 0.9rem; /* Reducir tamaño de texto */
     }
 
-    img {
-        width: 12px; /* Reducir tamaño de icono */
-        height: 12px;
-    }
 }

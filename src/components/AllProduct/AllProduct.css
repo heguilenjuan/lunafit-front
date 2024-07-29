@@ -1,8 +1,81 @@
-.allProductContainer{
+/* AllProduct.css */
+
+/* Contenedor de tarjetas */
+.allProductContainer {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 columnas por fila en desktop */
+    gap: 1rem; /* Espacio entre las tarjetas */
+    padding: 1rem; /* Relleno del contenedor */
+}
+
+/* Estilo de la tarjeta */
+.boxCard {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
-    padding: 0 3rem;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    background-color: rgb(251, 249, 249);
+    box-shadow: inset;
+    border-radius: 10px;
+    width: 100%; /* Ajusta al ancho del contenedor de la cuadrícula */
+    height: auto; /* Ajusta la altura según el contenido */
+    padding: 1rem;
+    box-sizing: border-box; /* Incluye el padding en el tamaño total */
+}
+
+/* Imagen de la tarjeta */
+.cardImage {
+    width: 100%;
+    max-height: 150px; /* Ajusta la altura máxima de la imagen */
+    object-fit: cover; /* Ajusta la imagen para cubrir el área */
+    border-radius: 5px;
+    margin-bottom: 0.5rem; /* Espacio entre la imagen y el texto */
+}
+
+/* Nombre de la tarjeta */
+.cardName {
+    color: grey;
+    width: 100%;
+    font-size: 16px;
+    text-align: center;
+    margin-bottom: 0.5rem; /* Espacio entre el nombre y el precio */
+}
+
+/* Precio de la tarjeta */
+.cardPrice {
+    color: black;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+/* Ajustes responsivos */
+@media (max-width: 1024px) {
+    .allProductContainer {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas por fila en pantallas medianas */
+    }
+}
+
+@media (max-width: 768px) {
+    .allProductContainer {
+        grid-template-columns: repeat(2, 1fr); /* 2 columnas por fila en pantallas más pequeñas */
+    }
+}
+
+@media (max-width: 480px) {
+    .allProductContainer {
+        grid-template-columns: 1fr; /* 1 columna por fila en pantallas muy pequeñas */
+    }
+
+    .boxCard {
+        margin: 0.5rem 0; /* Reduce el margen en pantallas más pequeñas */
+        padding: 0.5rem; /* Reduce el relleno */
+    }
+
+    .cardImage {
+        max-height: 120px; /* Reduce la altura máxima para pantallas pequeñas */
+    }
+
+    .cardName, .cardPrice {
+        font-size: 14px; /* Ajusta el tamaño del texto */
+    }
 }

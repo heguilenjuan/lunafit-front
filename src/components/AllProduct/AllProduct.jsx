@@ -1,8 +1,7 @@
-import { useEffect } from "react";
-import { useState } from "react"
-import Card from '../Product/Card/Card'
+import { useEffect, useState } from "react";
+import Card from '../Product/Card/Card';
+import './AllProduct.css';
 
-import './AllProduct.css'
 const AllProducts = () => {
     const [products, setProducts] = useState([]);
 
@@ -22,13 +21,12 @@ const AllProducts = () => {
                 if (data) {
                     setProducts(data);
                 }
-                // Muestra la respuesta del backend en la consola
             } catch (error) {
                 console.error('Error fetching products:', error);
             }
         };
         getProducts();
-    }, [])
+    }, []);
 
     return (
         <section className="allProductContainer">
@@ -36,7 +34,7 @@ const AllProducts = () => {
                 <Card key={index} data={product} />
             ))}
         </section>
-    )
-}
+    );
+};
 
-export default AllProducts
+export default AllProducts;

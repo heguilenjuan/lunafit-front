@@ -1,18 +1,24 @@
 body {
     background-color: #EBEBEB;
     padding: 0;
-    margin: 0;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
     font-family: "Roboto", sans-serif;
+    font-size: 1rem;
 }
 
 #root {
-    height: 100vh;
-    width: 100%;
+    height: auto;
+    width: auto;
     display: flex;
     flex-direction: column;
+    align-content: center;
     justify-content: space-between;
     gap: 1rem;
 }
+
+
 
 li {
     list-style: none;
@@ -21,4 +27,121 @@ li {
 a {
     color: black;
     text-decoration: none;
+}
+
+/* Estilo base para la tipografía */
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.75rem;
+}
+
+h3 {
+    font-size: 1.5rem;
+}
+
+p,
+li,
+a {
+    font-size: 1rem;
+}
+
+
+/* Media queries para ajustar la tipografía en pantallas más pequeñas */
+@media (max-width: 1200px) {
+    body {
+        font-size: 0.95rem;
+    }
+
+    h1 {
+        font-size: 1.9rem;
+    }
+
+    h2 {
+        font-size: 1.65rem;
+    }
+
+    h3 {
+        font-size: 1.4rem;
+    }
+
+    p,
+    li,
+    a {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 992px) {
+    body {
+        font-size: 0.9rem;
+    }
+
+    h1 {
+        font-size: 1.8rem;
+    }
+
+    h2 {
+        font-size: 1.55rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+
+    p,
+    li,
+    a {
+        font-size: 0.9rem;
+    }
+}
+
+@media (max-width: 768px) {
+    body {
+        font-size: 0.85rem;
+    }
+
+    h1 {
+        font-size: 1.7rem;
+    }
+
+    h2 {
+        font-size: 1.45rem;
+    }
+
+    h3 {
+        font-size: 1.2rem;
+    }
+
+    p,
+    li,
+    a {
+        font-size: 0.85rem;
+    }
+}
+
+@media (max-width: 576px) {
+    body {
+        font-size: 0.8rem;
+    }
+
+    h1 {
+        font-size: 1.6rem;
+    }
+
+    h2 {
+        font-size: 1.35rem;
+    }
+
+    h3 {
+        font-size: 1.1rem;
+    }
+
+    p,
+    li,
+    a {
+        font-size: 0.8rem;
+    }
 }

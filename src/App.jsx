@@ -1,27 +1,23 @@
 import { Route, Routes } from 'react-router-dom';
-import './App.css'
-import Header from './components/Layouts/Header/Header'
-import Navbar from './components/Navbar/Navbar'
+import './App.css';
+import Header from './components/Layouts/Header/Header';
 import ExpandCard from './components/Product/Show/ExpandCard';
 import Landing from './components/Landing/Landing';
-
-import CreateProduct from './components/Product/Create/CreateProduct';
 import Footer from './components/Layouts/Footer/Footer';
 import AllProducts from './components/AllProduct/AllProduct';
 import Contact from './components/Contact/Contact';
-
-import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PrivateRoute/PublicRoute';
+import Login from './components/user/Login/Login';
+import Register from './components/user/Register/Register';
+import PrivateRoute from './components/PrivateRoute/PrivateRoute';
+import Dashboard from "./components/admin/Dashboard";
+import CreateProduct from './components/Product/Create/CreateProduct';
 
-import Login from './components/User/Login/Login';
-import Register from './components/User/Register/Register';
-import Dashboard from './components/Admin/Dashboard';
 function App() {
   return (
     <>
       <div className='topContent'>
         <Header />
-        <Navbar />
       </div>
       <Routes>
         <Route path='/' element={<Landing />} />
@@ -30,12 +26,13 @@ function App() {
         <Route path='/products' element={<AllProducts />} />
         <Route path='/contact' element={<Contact />} />
         <Route path='/login' element={<PublicRoute element={<Login />} />} />
-        <Route path='/create-product' element={<PrivateRoute element={<CreateProduct />} requiredRole='admin' />} />
         <Route path='/register' element={<PublicRoute element={<Register />} />} />
-        <Route path='/dashboard' element={<PrivateRoute element={<Dashboard />} requiredRole='admin' />} />
+        <Route path='/dashboard' element={<PrivateRoute component={Dashboard} requiredRole='admin' />} />
+        <Route path='/create-product' element={<PrivateRoute component={CreateProduct} requiredRole='admin'/>}/>
       </Routes>
       <Footer />
     </>
-  )
+  );
 }
-export default App
+
+export default App;
