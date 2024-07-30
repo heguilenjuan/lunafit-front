@@ -1,24 +1,79 @@
-.containerForm{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-evenly;
-    align-items: center;
-    padding-block: 2rem;
-}
-
-.boxForm{
-    padding: 2rem;
-    background-color: #ffff;
+/* Container styling */
+.containerForm {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 1rem;
+    background-color: rgb(251, 249, 249);
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center ;
-    width: 40%;
 }
 
-.input{
-    height: 3rem;
-    width: 25rem;
-    margin-block-end: 2rem;
+
+/* Form styling */
+.boxForm {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* Input and textarea styling */
+.input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Error message styling */
+.error {
+    color: red;
+    font-size: 0.875rem;
+}
+
+/* Size container styling */
+.size-container {
+    margin-bottom: 1rem;
+}
+
+/* Select styling */
+.size-container select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+/* Button styling */
+button {
+    padding: 0.75rem;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .boxForm {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 480px) {
+    .input {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+
+    button {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
 }

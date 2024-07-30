@@ -16,7 +16,7 @@ const Footer = () => {
                         </li>
                         <li className='itemListFooter'>
                             <img src='/icons/facebook.svg' alt='meta' width={20} height={20} />
-                            <a href="http://" target="_blank" rel="noopener noreferrer">
+                            <a href="https://www.facebook.com/profile.php?id=61563566730373" target="_blank" rel="noopener noreferrer">
                                 Facebook
                             </a>
 
