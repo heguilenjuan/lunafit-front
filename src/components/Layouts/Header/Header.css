@@ -23,6 +23,24 @@ mark {
 }
 
 .logo {
-    width: 200px;
-    height: 200px;
+    width: 12.5rem;
+    height: 12.5rem;
+    padding: 0;
+}
+
+
+@media (max-width:480px) {
+    .logo{
+        width: 6.5rem;
+        height: 6.5rem;
+    }
+
+    .headerContainer{
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
 }

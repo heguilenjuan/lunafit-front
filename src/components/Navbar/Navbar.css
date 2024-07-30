@@ -1,25 +1,73 @@
-.navContainer{
-    height: 5rem;
+/* General Styles */
+.navContainer {
     display: flex;
     align-items: center;
     width: 100%;
     height: fit-content;
+    padding-block: 1rem;
 }
 
-.navList{
+.navList {
     display: flex;
     flex-direction: row;
     width: 100%;
     justify-content: space-evenly;
+    list-style: none; /* Remover estilo de lista */
+    padding: 0; /* Remover padding */
+    margin: 0; /* Remover margen */
 }
-.navItems{
+
+.navItems {
     display: flex;
     flex-direction: row;
-   
+    align-items: center; /* Alinear verticalmente */
+    text-decoration: none; /* Remover subrayado en links */
 }
-p{
+
+p {
     margin: 0;
+    padding-left: 0.5rem; /* Agregar espacio entre icono y texto */
+    color: inherit; /* Heredar color del link */
 }
-img{
-    padding-right: 1rem;
+
+li {
+    cursor: pointer;
+    list-style: none; /* Remover estilo de lista */
+}
+
+li:hover {
+    transition: 0.5s;
+    opacity: 50%;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+    .navList {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .navItems {
+        padding: 0.5rem 0; /* Agregar padding vertical para separación entre elementos */
+    }
+}
+
+@media (max-width: 480px) {
+    .navList{
+        margin: 0 auto;
+        width: 45%;
+        align-items: flex-start;
+    }
+    .navItems{
+        padding: 1rem 0.5rem;
+    }
+    .navContainer{
+        padding: 0;
+        width: fit-content;
+        
+    }
+    p {
+        font-size: 0.9rem; /* Reducir tamaño de texto */
+    }
+
 }
