@@ -4,6 +4,7 @@ import "./AllProduct.css";
 import Filter from "./Filter/Filter";
 import Spinner from "../Spinner/Spinner";
 
+
 const AllProducts = () => {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
@@ -14,11 +15,12 @@ const AllProducts = () => {
         size: [],
         category: []
     });
+    const backendUrl = process.env.REACT_APP_BACKEND_URL;
 
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const response = await fetch("http://localhost:3000/api/product", {
+                const response = await fetch(`${backendUrl}api/product`, {
                     method: "GET"
                 });
 
