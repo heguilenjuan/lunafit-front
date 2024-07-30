@@ -6,6 +6,7 @@ const ExpandCard = () => {
     const { id } = useParams(); // Obtener el id del producto desde la URL
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null); // Estado inicial con la imagen principal
+    const [selectedSize, setSelectedSize] = useState(null); // Estado para el talle seleccionado
 
     useEffect(() => {
         const getProductDetails = async () => {
@@ -29,29 +30,37 @@ const ExpandCard = () => {
         setSelectedImage(imageUrl); // Actualiza el estado con la nueva imagen seleccionada
     };
 
+    const handleSizeClick = (size) => {
+        setSelectedSize(size); // Actualiza el estado con el nuevo talle seleccionado
+    };
+
     if (!product) {
         return <div>Loading...</div>; // Puedes mostrar un indicador de carga mientras se obtienen los datos del producto
     }
-    console.log(product)
 
     return (
-       <>
-        <main className="expandCard">
+       <main className="expandCard">
             <div className='containerCard'>
                 <div className='boxImageCard'>
-                    <span className='ruteCard'>inicio/tops/etc</span>
+                    <span className='ruteCard'>Detalle del producto</span>
                     <div className='boxImage'>
                         <div className='thumbnails'>
                             {/* Miniaturas de imágenes */}
-                            <div onClick={() => handleImageClick(product.image)}>
-                                <img src={product.image} alt="" className='selectImage' />
-                            </div>
-                            <div onClick={() => handleImageClick(product.imageOne)}>
-                                <img src={product.imageOne} alt="" className='selectImage' />
-                            </div>
-                            <div onClick={() => handleImageClick(product.imageTwo)}>
-                                <img src={product.imageTwo} alt="" className='selectImage' />
-                            </div>
+                            {product.image && (
+                                <div onClick={() => handleImageClick(product.image)}>
+                                    <img src={product.image} alt="" className='selectImage' />
+                                </div>
+                            )}
+                            {product.imageOne && (
+                                <div onClick={() => handleImageClick(product.imageOne)}>
+                                    <img src={product.imageOne} alt="" className='selectImage' />
+                                </div>
+                            )}
+                            {product.imageTwo && (
+                                <div onClick={() => handleImageClick(product.imageTwo)}>
+                                    <img src={product.imageTwo} alt="" className='selectImage' />
+                                </div>
+                            )}
                         </div>
                         {/* Imagen principal seleccionada */}
                         <div>
@@ -65,20 +74,36 @@ const ExpandCard = () => {
                             {product.name}
                         </h2>
                         <span className='priceInfo'>${product.price}</span>
-                        <div className='newPrice'>
-                            <span className='newPriceText'>${product.offer}</span>
-                            <mark className='porcent'>{product.offerPercent}%</mark>
-                        </div>
+                        {product.offer !== 0 && (
+                            <div className='newPrice'>
+                                <span className='newPriceText'>${product.offer}</span>
+                                <mark className='porcent'>{product.offerPercent}%</mark>
+                            </div>
+                        )}
                     </div>
                     <div className='details'>
                         <h3 className='titleDetails'>Talles:</h3>
                         <div className='detailsSize'>
-                            
+                            {product.size.map((size, index) => (
+                                <span
+                                    key={index}
+                                    className={selectedSize === size ? 'active' : ''}
+                                    onClick={() => handleSizeClick(size)}
+                                >
+                                    {size}
+                                </span>
+                            ))}
                         </div>
                         <div className='boxStock'>
                             <span className='textStock'>Stock</span>
                             <span className='stockNumber'>{product.stock}</span>
                         </div>
+                        {product.description && (
+                            <div className='description'>
+                                <h3>Descripción:</h3>
+                                <p>{product.description}</p>
+                            </div>
+                        )}
                     </div>
                     <button className='btnConsult'>
                         <img src="/icons/whatsapp.svg" alt="iconWhatsapp" width={20} height={20} className='iconFill' />
@@ -87,7 +112,6 @@ const ExpandCard = () => {
                 </div>
             </div>
         </main>
-       </>
     );
 };
 

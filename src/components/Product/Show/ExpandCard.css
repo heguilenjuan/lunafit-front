@@ -1,155 +1,178 @@
 .expandCard {
-    padding: 2rem 8rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
 }
 
 .containerCard {
     display: flex;
-    flex-direction: row;
-    gap: 1rem;
-    background-color: #FFF;
-    padding: 5rem;
-    border-radius: 10px;
-    height: 80vh;
+    flex-direction: column;
+    max-width: 1200px;
+    width: 100%;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+    overflow: hidden;
 }
 
 .boxImageCard {
     display: flex;
     flex-direction: column;
-    width: 60%;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
 }
 
 .ruteCard {
-    font-size: 20px;
-    font-weight: 600;
+    align-self: flex-start;
+    margin-bottom: 10px;
+    font-size: 14px;
+    color: #999;
 }
 
 .boxImage {
     display: flex;
-    flex-direction: row;
-
+    flex-direction: column;
+    align-items: center;
 }
 
-.listImage {
+.thumbnails {
     display: flex;
-    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
 }
 
 .selectImage {
-    width: 120px;
-    height: 120px;
-    border-radius: 5px;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.selectImage:hover {
+    border-color: #000;
 }
 
 .imageSelected {
-    width: 500px;
-    height: 500px;
-    border-radius: 5px;
+    width: 100%;
+    max-width: 500px;
+    height: auto;
+    object-fit: cover;
+    border-radius: 8px;
 }
 
 .boxInfoCard {
-    display: flex;
-    flex-direction: column;
-    height: 93%;
-    width: 70%;
-    justify-content: space-between;
+    padding: 20px;
 }
 
 .info {
-    display: flex;
-    flex-direction: column;
-    height: fit-content;
-    justify-content: space-between;
-    border-bottom: 2px solid #898484;
+    margin-bottom: 20px;
 }
 
 .textInfo {
-    font-size: 25px;
-    width: 80%;
-    text-wrap: wrap;
+    font-size: 24px;
+    margin-bottom: 10px;
 }
 
-.priceInfo {
-    font-size: 45px;
-    font-weight: 520;
+.priceInfo, .newPriceText, .porcent {
+    font-size: 20px;
+    color: #ff0000;
 }
 
 .newPrice {
     display: flex;
-    flex-direction: row;
     align-items: center;
-    gap: 0.5rem;
-    padding-block: 1rem;
+    gap: 10px;
 }
 
-.newPriceText {
-    font-size: 30px;
-    font-weight: 500;
+.details {
+    margin-bottom: 20px;
 }
 
-.porcent {
-    font-size: 20px;
+.titleDetails {
+    font-size: 18px;
+    margin-bottom: 10px;
 }
-.details{
-    border-bottom: 2px solid #898484;
-}
-.titleDetails{
-    margin: 0;
-    padding-bottom: 1rem;
-}
+
 .detailsSize {
     display: flex;
-    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
 }
 
-.boxSize {
-    border: 1px solid green;
-    border-radius: 5px;
-    margin-right: 1rem;
-    width: 20%;
-    padding: 0.3rem;
-    font-weight: 600;
-    font-size: 20px;
-    width: 25px;
-    height: 25px;
-    display: flex;
-    justify-content: center;
-    align-items: center0;
-}
-
-.boxStock{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    padding-block: 1rem;
-    gap: 1rem;
-}
-
-.textStock{
-    font-size: 16px;
-    font-weight: 600;
-}
-.stockNumber{
-    padding: 0.2rem;
-    border: 1px solid black;
-    border-radius: 5px;
-    font-size: 12px;
-    font-weight: 500;
-}
-.btnConsult{
-    background-color: transparent;
-    font-weight: 25px;
-    height: 3rem;
-    border-radius: 5px;
-    font-weight: 600;
-    background-color: green;
-    color: white;
+.detailsSize span {
+    padding: 10px 15px;
+    background-color: #f0f0f0;
+    border-radius: 4px;
     cursor: pointer;
-}
-.btnConsult:hover{
-    background-color: white;
-    color: black;
+    transition: background-color 0.3s, color 0.3s;
 }
 
-.iconFill{
-    color: white;
+.detailsSize span:hover {
+    background-color: #d0d0d0;
+}
+
+.detailsSize .active {
+    background-color: #000;
+    color: #fff;
+}
+
+.boxStock {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.textStock {
+    font-size: 16px;
+}
+
+.stockNumber {
+    font-size: 16px;
+    color: #00ff00;
+}
+
+.description {
+    margin-top: 20px;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #333;
+}
+
+.btnConsult {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+    padding: 10px 20px;
+    background-color: #25D366;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 90%;
+}
+
+.btnConsult img {
+    margin-right: 10px;
+    
+}
+
+@media (min-width: 768px) {
+    .containerCard {
+        flex-direction: row;
+    }
+
+    .boxImageCard {
+        border-right: 1px solid #f0f0f0;
+        border-bottom: none;
+        flex: 1;
+    }
+
+    .boxInfoCard {
+        flex: 1;
+    }
 }
