@@ -28,7 +28,7 @@ const CreateProduct = () => {
             formData.append('imageOne', data.image1[0]); // Assuming 'image1' field is a single file
             formData.append('imageTwo', data.image2[0]); // Assuming 'image2' field is a single file
 
-            const response = await fetch('http://localhost:3000/api/product', {
+            const response = await fetch('https://backluna.vercel.app/api/product', {
                 method: 'POST',
                 body: formData,
                 headers: {

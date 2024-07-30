@@ -9,7 +9,7 @@ const Register = () => {
 
     const onSubmit = async (data) => {
         try {
-            const response = await fetch('http://localhost:3000/api/users/register', {
+            const response = await fetch('https://backluna.vercel.app/api/users/register', {
                 method: "POST",
                 body: JSON.stringify({ mail: data.mail, password: data.password }),
                 headers: {

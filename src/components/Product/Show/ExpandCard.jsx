@@ -11,7 +11,7 @@ const ExpandCard = () => {
         const getProductDetails = async () => {
             try {
                 // Suponiendo que obtienes los datos del producto de alguna fuente de datos
-                const response = await fetch(`http://localhost:3000/api/product/${id}`, {
+                const response = await fetch(`https://backluna.vercel.app/api/product/${id}`, {
                     method: 'GET'
                 });
                 const data = await response.json();

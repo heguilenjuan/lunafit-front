@@ -15,12 +15,12 @@ const AllProducts = () => {
         size: [],
         category: []
     });
-    const backendUrl = process.env.REACT_APP_BACKEND_URL;
+
 
     useEffect(() => {
         const getProducts = async () => {
             try {
-                const response = await fetch(`${backendUrl}api/product`, {
+                const response = await fetch(`https://backluna.vercel.app/api/product`, {
                     method: "GET"
                 });
 
