@@ -9,7 +9,6 @@ const AllProducts = () => {
     const [products, setProducts] = useState([]);
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [filters, setFilters] = useState({
-        color: [],
         size: [],
         category: []
     });
@@ -45,19 +44,16 @@ const AllProducts = () => {
 
     const applyFilters = () => {
         let filtered = products;
-        if (filters.color.length > 0) {
-            filtered = filtered.filter((product) =>
-                filters.color.includes(product.color)
-            );
-        }
-        if (filters.size.length > 0) {
-            filtered = filtered.filter((product) =>
-                filters.size.includes(product.size)
-            );
-        }
+        
         if (filters.category.length > 0) {
             filtered = filtered.filter((product) =>
                 filters.category.includes(product.category)
+            );
+        }
+        
+        if (filters.size.length > 0) {
+            filtered = filtered.filter((product) =>
+                filters.size.some(size => product.size.includes(size))
             );
         }
 
@@ -73,8 +69,8 @@ const AllProducts = () => {
                         <Filter filters={filters} setFilters={setFilters} />
                     </div>
                     <section className="allProductContainer">
-                        {filteredProducts.map((product, index) => (
-                            <Card key={index} data={product} />
+                        {filteredProducts.map((product) => (
+                            <Card key={product._id} data={product} />
                         ))}
                     </section>
                 </main>

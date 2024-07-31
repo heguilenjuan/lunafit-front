@@ -14,6 +14,8 @@ const CreateProduct = () => {
     const onSubmit = async (data) => {
         setLoading(true); // Set loading to true when the request starts
         setServerError(''); // Clear any previous server error
+
+        console.log(data.size);
         try {
             const formData = new FormData();
             formData.append('name', data.name);
@@ -23,7 +25,11 @@ const CreateProduct = () => {
             formData.append('offer', data.offer);
             formData.append('description', data.description);
             formData.append('color', data.color);
-            formData.append('size', JSON.stringify(data.size)); // Assuming 'size' is an array
+
+            // Convertir los tamaños seleccionados en un array y agregarlos al formData uno por uno
+            const sizes = Array.from(data.size); // Convertir a array
+            sizes.forEach(size => formData.append('size[]', size)); // Usar 'size[]' para enviar como array
+
             formData.append('image', data.image[0]); // Assuming 'image' field is a single file
             formData.append('imageOne', data.image1[0]); // Assuming 'image1' field is a single file
             formData.append('imageTwo', data.image2[0]); // Assuming 'image2' field is a single file
@@ -40,10 +46,9 @@ const CreateProduct = () => {
                 throw new Error('Network response was not ok');
             }
 
-            const result = await response.json();
             setLoading(false); // Set loading to false when the request finishes
             alert('Producto creado');
-            console.log('Product created:', result);
+            
         } catch (error) {
             setLoading(false); // Set loading to false if there's an error
             console.error('Error creating product:', error);

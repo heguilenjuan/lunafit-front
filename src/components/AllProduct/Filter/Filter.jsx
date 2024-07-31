@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import './Filter.css'
 /* eslint-disable react/prop-types */
-const Filter = ({ setFilters }) => {
+
+const Filter = ({setFilters }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
 
     useEffect(() => {
@@ -16,17 +17,21 @@ const Filter = ({ setFilters }) => {
     const handleCheckboxChange = (e) => {
         const { name, value, checked } = e.target;
 
-        if (checked) {
-            setFilters((prev) => ({
-                ...prev,
-                [name]: [...prev[name], value]
-            }));
-        } else {
-            setFilters((prev) => ({
-                ...prev,
-                [name]: prev[name].filter((item) => item !== value)
-            }));
-        }
+        setFilters((prev) => {
+            if (name === 'size') {
+                // Manejo de los filtros de tamaño
+                const sizes = checked 
+                    ? [...prev.size, value] 
+                    : prev.size.filter((item) => item !== value);
+                return { ...prev, size: sizes };
+            } else {
+                // Manejo de los filtros de categoría
+                const categories = checked 
+                    ? [...prev.category, value] 
+                    : prev.category.filter((item) => item !== value);
+                return { ...prev, category: categories };
+            }
+        });
     };
 
     const filterContent = (
@@ -37,7 +42,7 @@ const Filter = ({ setFilters }) => {
                     <input
                         type="checkbox"
                         name="category"
-                        value="calzas Largas"
+                        value="calzas largas"
                         onChange={handleCheckboxChange}
                     />
                     <label>Calzas Largas</label>

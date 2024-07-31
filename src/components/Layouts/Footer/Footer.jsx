@@ -1,6 +1,9 @@
 import './Footer.css'
 
 const Footer = () => {
+    const phoneNumber = '+542914429530'; // Reemplaza con tu número de teléfono
+        const message = 'Hola, que tal!! vengo desde la pagina, me gustaría más información.';
+        const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     return (
         <footer className='boxFooter'>
             <div className='networksFooter'>
@@ -24,7 +27,7 @@ const Footer = () => {
                         </li>
                         <li className='itemListFooter'>
                             <img src='/icons/whatsapp.svg' alt='whatsappSVG' width={20} height={20} />
-                            <a href="http://" target="_blank" rel="noopener noreferrer">
+                            <a href={url} target="_blank" rel="noopener noreferrer">
                                 Whatssap
                             </a>
 
