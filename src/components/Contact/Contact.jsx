@@ -1,7 +1,8 @@
+import NotFound from "../NotFound"
 
 const Contact = () => {
   return (
-    <main>FORMULARIO DE ENVIO DE MAIL</main>
+    <NotFound/>
   )
 }
 

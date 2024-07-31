@@ -48,7 +48,7 @@ const CreateProduct = () => {
 
             setLoading(false); // Set loading to false when the request finishes
             alert('Producto creado');
-            
+
         } catch (error) {
             setLoading(false); // Set loading to false if there's an error
             console.error('Error creating product:', error);
@@ -58,7 +58,7 @@ const CreateProduct = () => {
 
     return (
         <>
-            {loading ? <Spinner /> : 
+            {loading ? <Spinner /> :
                 <div className='containerForm'>
                     <h1>Create Product</h1>
                     <form onSubmit={handleSubmit(onSubmit)} className='boxForm' encType="multipart/form-data">
@@ -78,9 +78,9 @@ const CreateProduct = () => {
                         />
                         {errors.price && <p className='error'>{errors.price.message}</p>}
 
-                         <div className='size-container'>
+                        <div className='size-container'>
                             <label>Category</label>
-                            <select {...register('category')}  className='input'>
+                            <select {...register('category')} className='input'>
                                 <option value="calzas largas">Calzas largas</option>
                                 <option value="bikers">Bikers</option>
                                 <option value="calzas cortas">Calzas cortas</option>
