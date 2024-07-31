@@ -4,18 +4,15 @@ import "./AllProduct.css";
 import Filter from "./Filter/Filter";
 import Spinner from "../Spinner/Spinner";
 
-
 const AllProducts = () => {
     const [loading, setLoading] = useState(true);
     const [products, setProducts] = useState([]);
-
     const [filteredProducts, setFilteredProducts] = useState([]);
     const [filters, setFilters] = useState({
         color: [],
         size: [],
         category: []
     });
-
 
     useEffect(() => {
         const getProducts = async () => {
@@ -48,7 +45,6 @@ const AllProducts = () => {
 
     const applyFilters = () => {
         let filtered = products;
-
         if (filters.color.length > 0) {
             filtered = filtered.filter((product) =>
                 filters.color.includes(product.color)
@@ -65,6 +61,7 @@ const AllProducts = () => {
             );
         }
 
+        console.log('Filtered Products:', filtered);
         setFilteredProducts(filtered);
     };
 
@@ -72,7 +69,6 @@ const AllProducts = () => {
         <>
             {loading ? <Spinner /> :
                 <main className="containerAllProduct">
-
                     <div className="filterProducts">
                         <Filter filters={filters} setFilters={setFilters} />
                     </div>
@@ -81,8 +77,6 @@ const AllProducts = () => {
                             <Card key={index} data={product} />
                         ))}
                     </section>
-
-
                 </main>
             }
         </>

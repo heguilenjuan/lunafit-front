@@ -37,7 +37,7 @@ const Filter = ({ setFilters }) => {
                     <input
                         type="checkbox"
                         name="category"
-                        value="Calzas Largas"
+                        value="calzas Largas"
                         onChange={handleCheckboxChange}
                     />
                     <label>Calzas Largas</label>
@@ -46,7 +46,7 @@ const Filter = ({ setFilters }) => {
                     <input
                         type="checkbox"
                         name="category"
-                        value="Bikers"
+                        value="bikers"
                         onChange={handleCheckboxChange}
                     />
                     <label>Bikers</label>
@@ -55,54 +55,24 @@ const Filter = ({ setFilters }) => {
                     <input
                         type="checkbox"
                         name="category"
-                        value="Shorts"
+                        value="calzas cortas"
                         onChange={handleCheckboxChange}
                     />
-                    <label>Shorts</label>
+                    <label>Calzas cortas</label>
                 </div>
                 <div className="filter-item">
                     <input
                         type="checkbox"
                         name="category"
-                        value="Tops"
+                        value="tops"
                         onChange={handleCheckboxChange}
                     />
                     <label>Tops</label>
-                </div>
-                <div className="filter-item">
-                    <input
-                        type="checkbox"
-                        name="category"
-                        value="CONJUNTOS/SET"
-                        onChange={handleCheckboxChange}
-                    />
-                    <label>CONJUNTOS/SET</label>
                 </div>
             </div>
 
             <div className="filter-section">
                 <h3>Filtros</h3>
-                <div className="filter-subsection">
-                    <label htmlFor="color">Color</label>
-                    <div className="filter-item">
-                        <input
-                            type="checkbox"
-                            name="color"
-                            value="Negro"
-                            onChange={handleCheckboxChange}
-                        />
-                        <label>Negro</label>
-                    </div>
-                    <div className="filter-item">
-                        <input
-                            type="checkbox"
-                            name="color"
-                            value="Amarillo"
-                            onChange={handleCheckboxChange}
-                        />
-                        <label>Amarillo</label>
-                    </div>
-                </div>
 
                 <div className="filter-subsection">
                     <label>Talle</label>
@@ -132,6 +102,15 @@ const Filter = ({ setFilters }) => {
                             onChange={handleCheckboxChange}
                         />
                         <label>L</label>
+                    </div>
+                    <div className="filter-item">
+                        <input
+                            type="checkbox"
+                            name="size"
+                            value="XL"
+                            onChange={handleCheckboxChange}
+                        />
+                        <label>XL</label>
                     </div>
                 </div>
             </div>

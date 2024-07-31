@@ -79,7 +79,8 @@
 
 .priceInfo, .newPriceText, .porcent {
     font-size: 20px;
-    color: #ff0000;
+    font-weight: 500;
+    color: #35db35;
 }
 
 .newPrice {

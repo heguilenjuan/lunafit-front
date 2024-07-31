@@ -73,11 +73,16 @@ const CreateProduct = () => {
                         />
                         {errors.price && <p className='error'>{errors.price.message}</p>}
 
-                        <input
-                            placeholder='Category'
-                            {...register('category', { required: 'Category is required' })}
-                            className='input'
-                        />
+                         <div className='size-container'>
+                            <label>Category</label>
+                            <select {...register('category')}  className='input'>
+                                <option value="calzas largas">Calzas largas</option>
+                                <option value="bikers">Bikers</option>
+                                <option value="calzas cortas">Calzas cortas</option>
+                                <option value="tops">Tops</option>
+                                <option value="medias">Medias</option>
+                            </select>
+                        </div>
                         {errors.category && <p className='error'>{errors.category.message}</p>}
 
                         <input
@@ -101,14 +106,6 @@ const CreateProduct = () => {
                             {...register('description')}
                             className='input'
                         />
-
-                        <input
-                            placeholder='Color'
-                            {...register('color', { required: 'Color is required' })}
-                            className='input'
-                        />
-                        {errors.color && <p className='error'>{errors.color.message}</p>}
-
                         <div className='size-container'>
                             <label>Size (select multiple)</label>
                             <select {...register('size')} multiple className='input'>

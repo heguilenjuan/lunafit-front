@@ -13,7 +13,7 @@ const Card = (data) => {
 
             <img
                 className='cardImage'
-                src={hovered ? data.data.image : data.data.imageOne}
+                src={hovered ? data.data.imageOne : data.data.image}
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
                 alt="Product"
