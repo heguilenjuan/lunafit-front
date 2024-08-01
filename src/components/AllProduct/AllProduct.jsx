@@ -1,69 +1,53 @@
 import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import Card from "../Product/Card/Card";
 import "./AllProduct.css";
 import Filter from "./Filter/Filter";
 import Spinner from "../Spinner/Spinner";
+import { fetchProducts } from "../../redux/productsSlice";
 
 const AllProducts = () => {
-    const [loading, setLoading] = useState(true);
-    const [products, setProducts] = useState([]);
-    const [filteredProducts, setFilteredProducts] = useState([]);
+    const dispatch = useDispatch();
+    const products = useSelector((state) => state.products.items);
+    const productStatus = useSelector((state) => state.products.status);
+    const error = useSelector((state) => state.products.error);
     const [filters, setFilters] = useState({
         size: [],
         category: []
     });
+    const [filteredProducts, setFilteredProducts] = useState([]);
 
     useEffect(() => {
-        const getProducts = async () => {
-            try {
-                const response = await fetch(`https://backluna.vercel.app/api/product`, {
-                    method: "GET"
-                });
+        if (productStatus === 'idle') {
+            dispatch(fetchProducts());
+        }
+    }, [productStatus, dispatch]);
 
-                if (!response.ok) {
-                    throw new Error("Failed to fetch products");
-                }
+    useEffect(() => {
+        const applyFilters = () => {
+            let filtered = products;
 
-                const data = await response.json();
-                if (data) {
-                    setProducts(data);
-                    setFilteredProducts(data); // Initialize filtered products
-                    setLoading(false);
-                }
-            } catch (error) {
-                console.error("Error fetching products:", error);
+            if (filters.category.length > 0) {
+                filtered = filtered.filter((product) =>
+                    filters.category.includes(product.category)
+                );
             }
+
+            if (filters.size.length > 0) {
+                filtered = filtered.filter((product) =>
+                    filters.size.some(size => product.size.includes(size))
+                );
+            }
+
+            setFilteredProducts(filtered);
         };
-        getProducts();
-    }, []);
-
-    useEffect(() => {
         applyFilters();
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [filters]);
-
-    const applyFilters = () => {
-        let filtered = products;
-        
-        if (filters.category.length > 0) {
-            filtered = filtered.filter((product) =>
-                filters.category.includes(product.category)
-            );
-        }
-        
-        if (filters.size.length > 0) {
-            filtered = filtered.filter((product) =>
-                filters.size.some(size => product.size.includes(size))
-            );
-        }
-
-        console.log('Filtered Products:', filtered);
-        setFilteredProducts(filtered);
-    };
+    }, [filters, products]);
 
     return (
         <>
-            {loading ? <Spinner /> :
+            {productStatus === 'loading' && <Spinner />}
+            {productStatus === 'succeeded' && (
                 <main className="containerAllProduct">
                     <div className="filterProducts">
                         <Filter filters={filters} setFilters={setFilters} />
@@ -74,7 +58,8 @@ const AllProducts = () => {
                         ))}
                     </section>
                 </main>
-            }
+            )}
+            {productStatus === 'failed' && <div>{error}</div>}
         </>
     );
 };

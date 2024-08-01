@@ -2,67 +2,60 @@ import { useForm } from 'react-hook-form';
 import './CreateProduct.css';
 import { useState } from 'react';
 import Spinner from '../../Spinner/Spinner';
+import { fetchData } from '../../../utils/api';
 
 const CreateProduct = () => {
     const [loading, setLoading] = useState(false);
     const [serverError, setServerError] = useState('');
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
 
     // Obtén el token de autenticación del almacenamiento local
     const token = localStorage.getItem('token'); // Cambia esto según cómo manejes la autenticación
 
     const onSubmit = async (data) => {
-        setLoading(true); // Set loading to true when the request starts
-        setServerError(''); // Clear any previous server error
+        setLoading(true);
+        setServerError('');
+        const formData = new FormData();
+        formData.append('name', data.name);
+        formData.append('price', data.price);
+        formData.append('category', data.category);
+        formData.append('stock', data.stock);
+        formData.append('offer', data.offer);
+        formData.append('description', data.description);
+        formData.append('color', data.color);
+        // Convertir los tamaños seleccionados en un array y agregarlos al formData uno por uno
+        const sizes = Array.from(data.size); // Convertir a array
+        sizes.forEach(size => formData.append('size[]', size)); // Usar 'size[]' para enviar como array
+        formData.append('image', data.image[0]); // Assuming 'image' field is a single file
+        formData.append('imageOne', data.image1[0]); // Assuming 'image1' field is a single file
+        formData.append('imageTwo', data.image2[0]); // Assuming 'image2' field is a single file
 
-        console.log(data.size);
         try {
-            const formData = new FormData();
-            formData.append('name', data.name);
-            formData.append('price', data.price);
-            formData.append('category', data.category);
-            formData.append('stock', data.stock);
-            formData.append('offer', data.offer);
-            formData.append('description', data.description);
-            formData.append('color', data.color);
-
-            // Convertir los tamaños seleccionados en un array y agregarlos al formData uno por uno
-            const sizes = Array.from(data.size); // Convertir a array
-            sizes.forEach(size => formData.append('size[]', size)); // Usar 'size[]' para enviar como array
-
-            formData.append('image', data.image[0]); // Assuming 'image' field is a single file
-            formData.append('imageOne', data.image1[0]); // Assuming 'image1' field is a single file
-            formData.append('imageTwo', data.image2[0]); // Assuming 'image2' field is a single file
-
-            const response = await fetch('https://backluna.vercel.app/api/product', {
+            await fetchData('api/product', {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'Authorization': `Bearer ${token}`, // Add the token to the headers
+                    'Authorization': `Bearer ${token}`,
                 },
             });
 
-            if (!response.ok) {
-                throw new Error('Network response was not ok');
-            }
-
-            setLoading(false); // Set loading to false when the request finishes
+            setLoading(false);
             alert('Producto creado');
-
+            reset();
         } catch (error) {
-            setLoading(false); // Set loading to false if there's an error
+            setLoading(false);
             console.error('Error creating product:', error);
-            setServerError('Error creating product');
+            setServerError(`Error al conectarse con el servidor - ${error}`);
         }
     };
 
     return (
         <>
-            {loading ? <Spinner /> :
+            {loading ? <Spinner />
+                :
                 <div className='containerForm'>
                     <h1>Create Product</h1>
                     <form onSubmit={handleSubmit(onSubmit)} className='boxForm' encType="multipart/form-data">
-
                         <input
                             placeholder='Name'
                             {...register('name', { required: 'Product name is required' })}

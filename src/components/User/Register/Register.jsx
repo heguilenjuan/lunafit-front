@@ -1,15 +1,18 @@
 import './Register.css'
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { fetchData } from '../../../utils/api';
 
 const Register = () => {
-    const { register, handleSubmit, formState: { errors } } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
 
     const onSubmit = async (data) => {
         try {
-            const response = await fetch('https://backluna.vercel.app/api/users/register', {
+            await fetchData('api/users/register', {
                 method: "POST",
                 body: JSON.stringify({ mail: data.mail, password: data.password }),
                 headers: {
@@ -17,17 +20,11 @@ const Register = () => {
                 },
             });
 
-            const info = await response.json();
-
-            if (response.ok) {
-                setSuccessMessage('Usuario creado exitosamente');
-                setErrorMessage('');
-            } else {
-                setErrorMessage(info.error || 'Error al crear el usuario');
-                setSuccessMessage('');
-            }
+            alert('Usuario creado exitosamente');
+            reset();
+            navigate('/login');
         } catch (error) {
-            setErrorMessage('Error de red: no se pudo conectar con el servidor');
+            setErrorMessage(error.message || 'Error de red: no se pudo conectar con el servidor');
             setSuccessMessage('');
         }
     }
