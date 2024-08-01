@@ -4,6 +4,7 @@ import './Login.css';
 import { setToken } from "../../../utils/auth";
 import { useState } from "react";
 import Spinner from "../../Spinner/Spinner";
+import { fetchData } from "../../../utils/api";
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
@@ -12,10 +13,10 @@ const Login = () => {
     const [serverError, setServerError] = useState('');
 
     const onSubmit = async (data) => {
-        setLoading(true); // Set loading to true when the request starts
-        setServerError(''); // Clear any previous server error
+        setLoading(true);
+        setServerError('');
         try {
-            const response = await fetch('https://backluna.vercel.app/api/users/login', {
+            const result = await fetchData('api/users/login', {
                 method: "POST",
                 body: JSON.stringify({ mail: data.mail, password: data.password }),
                 headers: {
@@ -23,19 +24,18 @@ const Login = () => {
                 },
             });
 
-            const result = await response.json();
-
-            if (response.ok) {
-                setToken(result.token);
-                setLoading(false)
-                navigate('/'); // Redirigir al dashboard u otra página
-            } else {
-                setLoading(false); // Set loading to false if there's an error
-                setServerError(result.error);
+            // Verificar si la respuesta del servidor contiene un error
+            if (!result.token) {
+                throw new Error(result.message || 'mail o contraseña incorrectos.');
             }
+
+            setToken(result.token);
+            setLoading(false);
+            navigate('/');
+
         } catch (error) {
-            setLoading(false); // Set loading to false if there's an error
-            setServerError('Error de conexión con el servidor.');
+            setLoading(false);
+            setServerError(error.message || 'Ocurrió un error al iniciar sesión.');
         }
     };
 
@@ -66,7 +66,6 @@ const Login = () => {
                     </form>
                 </main>}
         </>
-
     );
 };
 
