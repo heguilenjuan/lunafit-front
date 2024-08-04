@@ -21,9 +21,14 @@ const Card = (data) => {
         return newPrice;
     };
 
+    const calculateDiscountPercentage = (price, discountedPrice) => {
+        return Math.round(((price - discountedPrice) / price) * 100);
+    };
+
     const hasOffer = data.data.offer > 0;
     const originalPrice = data.data.price;
     const discountedPrice = hasOffer ? handlePrice(originalPrice, data.data.offer) : null;
+    const discountPercentage = discountedPrice ? calculateDiscountPercentage(originalPrice, discountedPrice) : null;
 
     return (
         <Link to={`/product/${data.data._id}`} className='cardLink boxCard' onClick={handleClick}>
@@ -37,9 +42,18 @@ const Card = (data) => {
             <p className='cardName'>{data.data.name}</p>
             <div className='priceContainer'>
                 {hasOffer && (
-                    <span className='originalPrice'>${originalPrice}</span>
+                    <>
+                        <div>
+                            <span className='originalPrice'>${originalPrice}</span>
+                            <span className='discountPercentage'>-{discountPercentage}% OFF</span>
+                        </div>
+                        <span className='cardPrice'>${discountedPrice}</span>
+
+                    </>
                 )}
-                <span className='cardPrice'>{hasOffer ? `$${discountedPrice}` : `$${originalPrice}`}</span>
+                {!hasOffer && (
+                    <span className='cardPrice'>${originalPrice}</span>
+                )}
             </div>
         </Link>
     );

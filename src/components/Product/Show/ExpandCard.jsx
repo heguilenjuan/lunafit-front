@@ -78,7 +78,7 @@ const ExpandCard = () => {
                                     <span className='newPriceText'>
                                         ${handlePrice(product.price, product.offer)}
                                     </span>
-                                    <mark className='porcent'>{product?.offer}%</mark>
+                                    <mark className='porcent'>{product?.offer}% OFF</mark>
                                 </div>
                                 <div className='offerDuration'>
                                     {`Oferta válida desde 01/08/24 hasta 31/08/24`}
