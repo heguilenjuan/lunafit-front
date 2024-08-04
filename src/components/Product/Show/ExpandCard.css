@@ -77,16 +77,43 @@
     margin-bottom: 10px;
 }
 
-.priceInfo, .newPriceText, .porcent {
+.priceInfo {
     font-size: 20px;
     font-weight: 500;
-    color: #35db35;
+    color: #000;
+}
+
+.oldPrice {
+    font-size: 16px;
+    font-weight: bold; /* Negrita */
+    text-decoration: line-through; /* Tachado */
+    color: #888; /* Color tenue */
+    margin-right: 10px;
 }
 
 .newPrice {
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.newPriceText {
+    font-size: 24px;
+    font-weight: 700;
+    color: #35db35;
+}
+
+.porcent {
+    font-size: 18px;
+    background-color: #f0f0f0;
+    padding: 5px;
+    border-radius: 4px;
+}
+
+.offerDuration {
+    font-size: 14px;
+    color: #999;
+    margin-top: 10px;
 }
 
 .details {
@@ -102,7 +129,7 @@
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
-    padding-block:1rem;
+    padding-block: 1rem;
 }
 
 .detailsSize span {
@@ -160,7 +187,6 @@
 
 .btnConsult img {
     margin-right: 10px;
-    
 }
 
 @media (min-width: 768px) {

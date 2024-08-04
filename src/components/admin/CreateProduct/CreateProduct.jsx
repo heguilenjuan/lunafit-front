@@ -3,6 +3,7 @@ import './CreateProduct.css';
 import { useState } from 'react';
 import Spinner from '../../Spinner/Spinner';
 import { fetchData } from '../../../utils/api';
+import NavAdmin from '../NavAdmin';
 
 const CreateProduct = () => {
     const [loading, setLoading] = useState(false);
@@ -53,6 +54,8 @@ const CreateProduct = () => {
         <>
             {loading ? <Spinner />
                 :
+                <div>
+                <NavAdmin/>
                 <div className='containerForm'>
                     <h1>Create Product</h1>
                     <form onSubmit={handleSubmit(onSubmit)} className='boxForm' encType="multipart/form-data">
@@ -137,6 +140,7 @@ const CreateProduct = () => {
                         <button type="submit">Create Product</button>
                         {serverError && <p className='error'>{serverError}</p>}
                     </form>
+                </div>
                 </div>
             }
         </>
