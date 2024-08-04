@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { selectProduct } from '../../../redux/productsSlice';
 
-const Card = (data ) => {
+const Card = (data) => {
     const [hovered, setHovered] = useState(false);
     const dispatch = useDispatch();
 
@@ -14,6 +14,16 @@ const Card = (data ) => {
     const handleClick = () => {
         dispatch(selectProduct(data));
     };
+
+    const handlePrice = (price, offer) => {
+        let newPrice = price - (offer * price) / 100;
+        newPrice = Math.round(newPrice);
+        return newPrice;
+    };
+
+    const hasOffer = data.data.offer > 0;
+    const originalPrice = data.data.price;
+    const discountedPrice = hasOffer ? handlePrice(originalPrice, data.data.offer) : null;
 
     return (
         <Link to={`/product/${data.data._id}`} className='cardLink boxCard' onClick={handleClick}>
@@ -25,7 +35,12 @@ const Card = (data ) => {
                 alt="Product"
             />
             <p className='cardName'>{data.data.name}</p>
-            <span className='cardPrice'>${data.data.price}</span>
+            <div className='priceContainer'>
+                {hasOffer && (
+                    <span className='originalPrice'>${originalPrice}</span>
+                )}
+                <span className='cardPrice'>{hasOffer ? `$${discountedPrice}` : `$${originalPrice}`}</span>
+            </div>
         </Link>
     );
 };
