@@ -1,8 +1,8 @@
 import { Route, Routes } from 'react-router-dom';
-import { Suspense, lazy } from 'react';
+import { Suspense, lazy, useState, useEffect } from 'react';
 //vercel
-import { Analytics } from "@vercel/analytics/react"
-import { SpeedInsights } from "@vercel/speed-insights/react"
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 //css
 import './App.css';
 
@@ -13,6 +13,7 @@ import Spinner from './components/Spinner/Spinner';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PrivateRoute/PublicRoute';
 import WhatsAppButton from './components/WhatsappButton/WhatsAppButton';
+import ModalReutilizable from './components/ModalReutilizable/ModalReutilizable';
 
 // Dynamically import components
 const ExpandCard = lazy(() => import('./components/Product/Show/ExpandCard'));
@@ -25,12 +26,32 @@ const Dashboard = lazy(() => import('./components/admin/Dashboard'));
 const CreateProduct = lazy(() => import('./components/admin/CreateProduct/CreateProduct'));
 
 function App() {
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  useEffect(() => {
+    const isModalShown = sessionStorage.getItem('isModalShown');
+    if (!isModalShown) {
+      setIsModalOpen(true);
+      sessionStorage.setItem('isModalShown', 'true');
+    }
+  }, []);
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+  };
+
   return (
     <>
       <div className='topContent'>
         <Header />
       </div>
+      {isModalOpen && (
+        <ModalReutilizable
+          imageUrl="/promoEdit.jpg"
+          altText="Promocion de agosto"
+          closeModal={closeModal}
+        />
+      )}
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path='/' element={<Landing />} />
@@ -44,7 +65,7 @@ function App() {
           <Route path='/create-product' element={<PrivateRoute component={CreateProduct} requiredRole='admin' />} />
         </Routes>
       </Suspense>
-      <WhatsAppButton/>
+      <WhatsAppButton />
       <Footer />
       <Analytics />
       <SpeedInsights />
