@@ -27,12 +27,18 @@ const ExpandCard = () => {
     };
 
     const phoneNumber = '+542914429530';
-    const message = `Hola, estoy interesada en el producto *${product?.name}*, quería coordinar para probármelo!.`
+    const message = `Hola, estoy interesada en el producto *${product?.name}*, quería coordinar para probármelo!.`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
     if (!product) {
         return <div>Loading...</div>;
     }
+
+    const handlePrice = (price, offer) => {
+        let newPrice = price - (offer * price) / 100;
+        newPrice = Math.round(newPrice);
+        return newPrice;
+    };
 
     return (
         <main className="expandCard">
@@ -65,12 +71,21 @@ const ExpandCard = () => {
                 <div className='boxInfoCard'>
                     <div className='info'>
                         <h2 className='textInfo'>{product?.name}</h2>
-                        <span className='priceInfo'>${product?.price}</span>
-                        {product?.offer !== 0 && (
-                            <div className='newPrice'>
-                                <span className='newPriceText'>${product?.offer}</span>
-                                <mark className='porcent'>{product?.offerPercent}%</mark>
+                        {product?.offer !== 0 ? (
+                            <div className='priceInfo'>
+                                <span className='oldPrice'>${product?.price}</span>
+                                <div className='newPrice'>
+                                    <span className='newPriceText'>
+                                        ${handlePrice(product.price, product.offer)}
+                                    </span>
+                                    <mark className='porcent'>{product?.offer}%</mark>
+                                </div>
+                                <div className='offerDuration'>
+                                    {`Oferta válida desde 01/08/24 hasta 31/08/24`}
+                                </div>
                             </div>
+                        ) : (
+                            <span className='priceInfo newPriceText'>${product?.price}</span>
                         )}
                     </div>
                     <div className='details'>
@@ -97,7 +112,7 @@ const ExpandCard = () => {
                             </div>
                         )}
                     </div>
-                    <a href={url} target="_blank">
+                    <a href={url} target="_blank" rel="noopener noreferrer">
                         <button className='btnConsult'>
                             <img src="/icons/whatsapp.svg" alt="iconWhatsapp" width={20} height={20} className='iconFill' />
                             Consultanos

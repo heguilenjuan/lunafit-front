@@ -1,24 +1,48 @@
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchData } from '../utils/api';
-import { getToken } from '../utils/auth'; // Asumiendo que tienes una función para obtener el token
+import { getToken } from '../utils/auth';
 
-// Async thunk para obtener productos
 export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
     const response = await fetchData('api/product', { method: 'GET' });
     return response;
 });
 
-// Async thunk para eliminar un producto
 export const deleteProduct = createAsyncThunk('products/deleteProduct', async (productId) => {
-    const token = getToken(); // Obtén el token como sea necesario en tu aplicación
+    const token = getToken();
     const result = await fetchData(`api/product/${productId}`, {
         method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-        },
+        headers: { 'Authorization': `Bearer ${token}` },
     });
     return result;
 });
+
+export const updateProduct = createAsyncThunk(
+    'products/updateProduct',
+    async ({ id, ...updatedProduct }) => {
+        const token = getToken();
+        const formData = new FormData();
+        for (const key in updatedProduct) {
+            if (Array.isArray(updatedProduct[key])) {
+                formData.append(key, JSON.stringify(updatedProduct[key]));
+            } else {
+                formData.append(key, updatedProduct[key]);
+            }
+        }
+
+        const response = await fetchData(`api/product/${id}`, {
+            method: 'PUT',
+            headers: { 'Authorization': `Bearer ${token}` },
+            body: formData,
+        });
+
+        if (!response.ok) {
+            throw new Error('Failed to update product');
+        }
+
+        const result = await response.json();
+        return result;
+    }
+);
 
 const productsSlice = createSlice({
     name: 'products',
@@ -51,7 +75,14 @@ const productsSlice = createSlice({
             })
             .addCase(deleteProduct.rejected, (state, action) => {
                 state.error = action.error.message;
-            });
+            })
+            .addCase(updateProduct.fulfilled, (state, action) => {
+                const index = state.items.findIndex(product => product._id === action.payload._id);
+                if (index !== -1) {
+                    state.items[index] = action.payload;
+                }
+            })
+            // No se maneja el estado de actualización aquí, se manejará en el componente
     },
 });
 

@@ -22,8 +22,7 @@ const Contact = lazy(() => import('./components/Contact/Contact'));
 const Login = lazy(() => import('./components/user/Login/Login'));
 const Register = lazy(() => import('./components/user/Register/Register'));
 const Dashboard = lazy(() => import('./components/admin/Dashboard'));
-const CreateProduct = lazy(() => import('./components/Product/Create/CreateProduct'));
-
+const CreateProduct = lazy(() => import('./components/admin/CreateProduct/CreateProduct'));
 
 function App() {
   
