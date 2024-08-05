@@ -1,5 +1,4 @@
-import NotFound from "../NotFound"
-
+import NotFound from '../NotFound/NotFound';
 const Contact = () => {
   return (
     <NotFound/>
