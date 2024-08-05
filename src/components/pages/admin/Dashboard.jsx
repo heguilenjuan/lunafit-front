@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { fetchProducts, deleteProduct, updateProduct } from '../../redux/productsSlice';
+import { fetchProducts, deleteProduct, updateProduct } from '../../../redux/productsSlice';
 import './Dashboard.css';
-import Spinner from '../Spinner/Spinner';
-import EditIcon from '../../assets/edit.svg';
-import DeleteIcon from '../../assets/delete.svg';
+import Spinner from '../../Spinner/Spinner';
+import EditIcon from '../../../assets/icons/edit.svg';
+import DeleteIcon from '../../../assets/icons/delete.svg';
 import NavAdmin from './NavAdmin';
 import ModalComponent from './ModalComponent';
 import EditComponent from './EditComponent';
@@ -35,12 +35,6 @@ const Dashboard = () => {
       dispatch(fetchProducts());
     }
   }, [productStatus, dispatch]);
-
-  useEffect(() => {
-    if (productStatus === 'succeeded') {
-      console.log('Products have been updated');
-    }
-  }, [products, productStatus]);
 
   const handleDelete = (productId) => {
     setProductToDelete(productId);

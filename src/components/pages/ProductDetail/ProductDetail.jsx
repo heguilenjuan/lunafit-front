@@ -1,9 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector } from 'react-redux';
-import './ExpandCard.css';
 
-const ExpandCard = () => {
+
+import './ProductDetail.css';
+
+
+import Whatsapp from '../../../assets/icons/whatsapp.svg';
+const ProductDetail = () => {
     const { id } = useParams(); // Obtener el id del producto desde la URL
     const products = useSelector((state) => state.products.items);
     const [product, setProduct] = useState(null);
@@ -114,7 +118,7 @@ const ExpandCard = () => {
                     </div>
                     <a href={url} target="_blank" rel="noopener noreferrer">
                         <button className='btnConsult'>
-                            <img src="/icons/whatsapp.svg" alt="iconWhatsapp" width={20} height={20} className='iconFill' />
+                            <img src={Whatsapp} alt="iconWhatsapp" width={20} height={20} className='iconFill' />
                             Consultanos
                         </button>
                     </a>
@@ -124,4 +128,4 @@ const ExpandCard = () => {
     );
 };
 
-export default ExpandCard;
+export default ProductDetail;

@@ -1,5 +1,5 @@
 import './ModalReutilizable.css';
-import CloseSvg from '../../assets/close.svg'
+import CloseSvg from '../../assets/icons/close.svg'
 
 // eslint-disable-next-line react/prop-types
 const ModalReutilizable = ({ imageUrl, altText, closeModal }) => {

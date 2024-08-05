@@ -3,7 +3,7 @@ import './CreateProduct.css';
 import { useState } from 'react';
 import Spinner from '../../Spinner/Spinner';
 import { fetchData } from '../../../utils/api';
-import NavAdmin from '../NavAdmin';
+import NavAdmin from '../admin/NavAdmin';
 
 const CreateProduct = () => {
     const [loading, setLoading] = useState(false);

@@ -1,13 +1,16 @@
 import { Link } from "react-router-dom"
-import CarrouselImage from "../sections/CarrouselImage"
+import CarrouselImage from "../../Carrousel/CarrouselImage"
+
 import './Landing.css'
+
+import BannerProduct from '../../../assets/images/bannerProduct.png'
 const Landing = () => {
   return (
     <main>
       <CarrouselImage />
       <div className="bannerSection">
         <Link to={'/products'}>
-          <img src="/bannerProduct.png" alt="bannerProduct" className="imageBanner" />
+          <img src={BannerProduct} alt="bannerProduct" className="imageBanner" />
         </Link>
       </div>
     </main>

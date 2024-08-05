@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import Card from "../Product/Card/Card";
+import Card from '../../Card/Card';
 import "./AllProduct.css";
 import Filter from "./Filter/Filter";
-import Spinner from "../Spinner/Spinner";
-import { fetchProducts } from "../../redux/productsSlice";
+import Spinner from "../../Spinner/Spinner";
+import { fetchProducts } from "../../../redux/productsSlice";
 
 const AllProducts = () => {
     const dispatch = useDispatch();

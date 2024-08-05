@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getToken, getRoleFromToken, clearToken } from '../../utils/auth';
 
+
+import MoonField from '../../assets/icons/moonField.svg'
 const Navbar = () => {
     const [hoveredItem, setHoveredItem] = useState(null);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
@@ -35,14 +37,14 @@ const Navbar = () => {
     const role = token ? getRoleFromToken(token) : null;
 
     const navItems = [
-        { text: "INICIO", icon: "/icons/moon.svg", iconHovered: "/icons/moonField.svg", to: '/' },
-        { text: "PRODUCTOS", icon: "/icons/moon.svg", iconHovered: "/icons/moonField.svg", to: '/products' },
-        { text: "CONTACTO", icon: "/icons/moon.svg", iconHovered: "/icons/moonField.svg", to: '/contact' },
+        { text: "INICIO", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/' },
+        { text: "PRODUCTOS", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/products' },
+        { text: "CONTACTO", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/contact' },
         ...(token ? [
-            role === 'admin' ? { text: "PANEL ADMINISTRADOR", icon: "/icons/moon.svg", iconHovered: "/icons/moonField.svg", to: '/dashboard' } : null,
-            { text: "CERRAR SESIÓN", icon: "/icons/moon.svg", iconHovered: "/icons/moonField.svg", to: '#', onClick: handleLogout }
+            role === 'admin' ? { text: "PANEL ADMINISTRADOR", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/dashboard' } : null,
+            { text: "CERRAR SESIÓN", icon: "/icons/moon.svg", iconHovered: MoonField, to: '#', onClick: handleLogout }
         ] : [
-            { text: "LOGIN/REGISTER", icon: "/icons/moon.svg", iconHovered: "/icons/moonField.svg", to: '/login' }
+            { text: "LOGIN/REGISTER", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/login' }
         ])
     ].filter(Boolean);
 
