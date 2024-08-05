@@ -7,6 +7,13 @@ export const fetchProducts = createAsyncThunk('products/fetchProducts', async ()
     return response;
 });
 
+// Fetch a product by ID
+export const fetchProductById = createAsyncThunk('products/fetchProductById', async (id) => {
+    const response = await fetchData(`api/product/${id}`);
+    return response;
+});
+
+
 export const deleteProduct = createAsyncThunk('products/deleteProduct', async (productId) => {
     const token = getToken();
     const result = await fetchData(`api/product/${productId}`, {
@@ -82,7 +89,7 @@ const productsSlice = createSlice({
                     state.items[index] = action.payload;
                 }
             })
-            // No se maneja el estado de actualización aquí, se manejará en el componente
+        // No se maneja el estado de actualización aquí, se manejará en el componente
     },
 });
 

@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import { useSelector } from 'react-redux';
-
-
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchProductById } from '../../../redux/productsSlice';
 import './ProductDetail.css';
-
-
 import Whatsapp from '../../../assets/icons/whatsapp.svg';
+import Spinner from '../../Spinner/Spinner';
+
 const ProductDetail = () => {
-    const { id } = useParams(); // Obtener el id del producto desde la URL
+    const { id } = useParams();
+    const dispatch = useDispatch();
     const products = useSelector((state) => state.products.items);
+    const loading = useSelector((state) => state.products.loading);
+    const error = useSelector((state) => state.products.error);
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
@@ -19,8 +21,15 @@ const ProductDetail = () => {
         if (fetchedProduct) {
             setProduct(fetchedProduct);
             setSelectedImage(fetchedProduct.image);
+        } else {
+            dispatch(fetchProductById(id)).then((response) => {
+                if (response.payload) {
+                    setProduct(response.payload);
+                    setSelectedImage(response.payload.image);
+                }
+            });
         }
-    }, [id, products]);
+    }, [id, products, dispatch]);
 
     const handleImageClick = (imageUrl) => {
         setSelectedImage(imageUrl);
@@ -34,8 +43,16 @@ const ProductDetail = () => {
     const message = `Hola, estoy interesada en el producto *${product?.name}*, quería coordinar para probármelo!.`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
+    if (loading) {
+        return <Spinner />;
+    }
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
+
     if (!product) {
-        return <div>Loading...</div>;
+        return <Spinner/>;
     }
 
     const handlePrice = (price, offer) => {
