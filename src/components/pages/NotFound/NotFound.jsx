@@ -1,10 +1,10 @@
 import './NotFound.css'; // Asegúrate de tener este archivo de estilos
-
+import Logo from '../../../assets/images/logo.webp'
 const NotFound = () => {
     return (
         <div className="not-found-container">
             <img 
-                src="/logo.webp" 
+                src={Logo} 
 
                 alt="Proximamente disponible" 
                 className="not-found-image"
