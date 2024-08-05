@@ -7,23 +7,24 @@ import { SpeedInsights } from "@vercel/speed-insights/react";
 import './App.css';
 
 //components
-import Header from './components/Layouts/Header/Header';
-import Footer from './components/Layouts/Footer/Footer';
+import Header from './components/Header/Header';
+import Footer from './components/Footer/Footer';
 import Spinner from './components/Spinner/Spinner';
 import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PrivateRoute/PublicRoute';
 import WhatsAppButton from './components/WhatsappButton/WhatsAppButton';
 import ModalReutilizable from './components/ModalReutilizable/ModalReutilizable';
 
+
 // Dynamically import components
-const ExpandCard = lazy(() => import('./components/Product/Show/ExpandCard'));
-const Landing = lazy(() => import('./components/Landing/Landing'));
-const AllProducts = lazy(() => import('./components/AllProduct/AllProduct'));
-const Contact = lazy(() => import('./components/Contact/Contact'));
-const Login = lazy(() => import('./components/user/Login/Login'));
-const Register = lazy(() => import('./components/user/Register/Register'));
-const Dashboard = lazy(() => import('./components/admin/Dashboard'));
-const CreateProduct = lazy(() => import('./components/admin/CreateProduct/CreateProduct'));
+const Landing = lazy(() => import('./components/pages/Landing/Landing'));
+const ProductDetail = lazy(() => import('./components/pages/ProductDetail/ProductDetail'));
+const AllProducts = lazy(() => import('./components/pages/AllProduct/AllProduct'));
+const Contact = lazy(() => import('./components/pages/Contact/Contact'));
+const Login = lazy(() => import('./components/pages/user/Login/Login'));
+const Register = lazy(() => import('./components/pages/user/Register/Register'));
+const Dashboard = lazy(() => import('./components/pages/admin/Dashboard'));
+const CreateProduct = lazy(() => import('./components/pages/CreateProduct/CreateProduct'));
 
 function App() {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -56,7 +57,7 @@ function App() {
         <Routes>
           <Route path='/' element={<Landing />} />
           <Route path="*" element={<Landing />} /> {/* route when page not found */}
-          <Route path='/product/:id' element={<ExpandCard />} />
+          <Route path='/product/:id' element={<ProductDetail />} />
           <Route path='/products' element={<AllProducts />} />
           <Route path='/contact' element={<Contact />} />
           <Route path='/login' element={<PublicRoute element={<Login />} />} />

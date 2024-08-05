@@ -1,5 +1,6 @@
 import './WhatsAppButton.css';
 
+import WPSVG from '../../assets/icons/whatsap-bottom.svg'
 const WhatsAppButton = () => {
     const handleWhatsAppClick = () => {
         const phoneNumber = '+542914429530'; // Reemplaza con tu número de teléfono
@@ -10,7 +11,7 @@ const WhatsAppButton = () => {
 
     return (
         <div className="whatsAppButton" onClick={handleWhatsAppClick}>
-            <img src="/icons/whatsap-bottom.svg" alt="whatsap-icon" width={50} height={50}/>
+            <img src={WPSVG} alt="whatsap-icon" width={50} height={50}/>
         </div>
     );
 };

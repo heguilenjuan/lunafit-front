@@ -2,8 +2,15 @@ import { Carousel } from "react-responsive-carousel"
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import './CarrouselImage.css';
 
+
+//images
+import Carrousel1 from '../../assets/images/carrousel1.png';
+import Carrousel2 from '../../assets/images/carrousel2.png';
+import Carrousel3 from '../../assets/images/carrousel3.png';
+
+
 const CarrouselImage = () => {
-    const img = ['/carrousel1.png', '/carrousel2.png', '/carrousel3.png']
+    const img = [Carrousel1, Carrousel2, Carrousel3]
     return (
         <div className="section-carrousel">
             <Carousel className="crsl" autoPlay infiniteLoop centerMode interval={3000} showStatus={false} showArrows={false} >

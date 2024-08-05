@@ -1,10 +1,12 @@
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import './Login.css';
-import { setToken } from "../../../utils/auth";
+import { setToken } from "../../../../utils/auth";
+import { fetchData } from "../../../../utils/api";
 import { useState } from "react";
-import Spinner from "../../Spinner/Spinner";
-import { fetchData } from "../../../utils/api";
+
+
+import Spinner from "../../../Spinner/Spinner";
 
 const Login = () => {
     const [loading, setLoading] = useState(false);

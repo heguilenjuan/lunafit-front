@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import './Card.css';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { selectProduct } from '../../../redux/productsSlice';
+import { selectProduct } from '../../redux/productsSlice';
 
 const Card = (data) => {
     const [hovered, setHovered] = useState(false);
