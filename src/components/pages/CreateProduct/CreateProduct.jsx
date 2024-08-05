@@ -55,92 +55,92 @@ const CreateProduct = () => {
             {loading ? <Spinner />
                 :
                 <div>
-                <NavAdmin/>
-                <div className='containerForm'>
-                    <h1>Create Product</h1>
-                    <form onSubmit={handleSubmit(onSubmit)} className='boxForm' encType="multipart/form-data">
-                        <input
-                            placeholder='Name'
-                            {...register('name', { required: 'Product name is required' })}
-                            className='input'
-                        />
-                        {errors.name && <p className='error'>{errors.name.message}</p>}
+                    <NavAdmin />
+                    <div className='containerForm'>
+                        <h1>Create Product</h1>
+                        <form onSubmit={handleSubmit(onSubmit)} className='boxForm' encType="multipart/form-data">
+                            <input
+                                placeholder='Name'
+                                {...register('name', { required: 'Product name is required' })}
+                                className='input'
+                            />
+                            {errors.name && <p className='error'>{errors.name.message}</p>}
 
-                        <input
-                            placeholder='Price'
-                            type="number"
-                            {...register('price', { required: 'Price is required', min: 0 })}
-                            className='input'
-                        />
-                        {errors.price && <p className='error'>{errors.price.message}</p>}
+                            <input
+                                placeholder='Price'
+                                type="number"
+                                {...register('price', { required: 'Price is required', min: 0 })}
+                                className='input'
+                            />
+                            {errors.price && <p className='error'>{errors.price.message}</p>}
 
-                        <div className='size-container'>
-                            <label>Category</label>
-                            <select {...register('category')} className='input'>
-                                <option value="calzas largas">Calzas largas</option>
-                                <option value="bikers">Bikers</option>
-                                <option value="calzas cortas">Calzas cortas</option>
-                                <option value="tops">Tops</option>
-                                <option value="medias">Medias</option>
-                            </select>
-                        </div>
-                        {errors.category && <p className='error'>{errors.category.message}</p>}
+                            <div className='size-container'>
+                                <label>Category</label>
+                                <select {...register('category')} className='input'>
+                                    <option value="calzas largas">Calzas largas</option>
+                                    <option value="bikers">Bikers</option>
+                                    <option value="calzas cortas">Calzas cortas</option>
+                                    <option value="tops">Tops</option>
+                                    <option value="medias">Medias</option>
+                                </select>
+                            </div>
+                            {errors.category && <p className='error'>{errors.category.message}</p>}
 
-                        <input
-                            placeholder='Stock'
-                            type="number"
-                            {...register('stock', { min: 0 })}
-                            className='input'
-                        />
-                        {errors.stock && <p className='error'>{errors.stock.message}</p>}
+                            <input
+                                placeholder='Stock'
+                                type="number"
+                                {...register('stock', { min: 0 })}
+                                className='input'
+                            />
+                            {errors.stock && <p className='error'>{errors.stock.message}</p>}
 
-                        <input
-                            placeholder='Offer'
-                            type="number"
-                            {...register('offer', { min: 0 })}
-                            className='input'
-                        />
-                        {errors.offer && <p className='error'>{errors.offer.message}</p>}
+                            <input
+                                placeholder='Offer'
+                                type="number"
+                                {...register('offer', { min: 0 })}
+                                className='input'
+                            />
+                            {errors.offer && <p className='error'>{errors.offer.message}</p>}
 
-                        <textarea
-                            placeholder='Description'
-                            {...register('description')}
-                            className='input'
-                        />
-                        <div className='size-container'>
-                            <label>Size (select multiple)</label>
-                            <select {...register('size')} multiple className='input'>
-                                <option value="S">S</option>
-                                <option value="M">M</option>
-                                <option value="L">L</option>
-                                <option value="XL">XL</option>
-                            </select>
-                        </div>
+                            <textarea
+                                placeholder='Description'
+                                {...register('description')}
+                                className='input'
+                            />
+                            <div className='size-container'>
+                                <label>Size (select multiple)</label>
+                                <select {...register('size')} multiple className='input'>
+                                    <option value="S">S</option>
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                </select>
+                            </div>
 
-                        <input
-                            type="file"
-                            {...register('image', { required: 'Image file is required' })}
-                            className='input'
-                        />
-                        {errors.image && <p className='error'>{errors.image.message}</p>}
+                            <input
+                                type="file"
+                                {...register('image', { required: 'Image file is required' })}
+                                className='input'
+                            />
+                            {errors.image && <p className='error'>{errors.image.message}</p>}
 
-                        <input
-                            type="file"
-                            {...register('image1', { required: 'Image 1 file is required' })}
-                            className='input'
-                        />
-                        {errors.image1 && <p className='error'>{errors.image1.message}</p>}
+                            <input
+                                type="file"
+                                {...register('image1', { required: 'Image 1 file is required' })}
+                                className='input'
+                            />
+                            {errors.image1 && <p className='error'>{errors.image1.message}</p>}
 
-                        <input
-                            type="file"
-                            {...register('image2')}
-                            className='input'
-                        />
+                            <input
+                                type="file"
+                                {...register('image2')}
+                                className='input'
+                            />
 
-                        <button type="submit">Create Product</button>
-                        {serverError && <p className='error'>{serverError}</p>}
-                    </form>
-                </div>
+                            <button type="submit">Create Product</button>
+                            {serverError && <p className='error'>{serverError}</p>}
+                        </form>
+                    </div>
                 </div>
             }
         </>
