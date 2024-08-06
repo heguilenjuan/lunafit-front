@@ -19,7 +19,6 @@ const ResetPassword = () => {
         const tokenFromQuery = queryParams.get('token');
         setToken(tokenFromQuery);
 
-        console.log('Token:', tokenFromQuery); // Verificar el token en la consola
     }, [location.search]);
 
     const handleSubmit = async (e) => {

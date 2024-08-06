@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import './Register.css';
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
@@ -18,11 +19,12 @@ const Register = () => {
             setErrorMessage('Las contraseñas no coinciden');
             return;
         }
+        const { confirmPassword, ...requestData } = data;
 
         try {
             await fetchData('api/users/register', {
                 method: "POST",
-                body: JSON.stringify(data),
+                body: JSON.stringify(requestData),
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -63,7 +65,7 @@ const Register = () => {
 
                 <input
                     placeholder="Email"
-                    {...register("email", {
+                    {...register("mail", {
                         required: 'El email es obligatorio',
                         pattern: {
                             value: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
@@ -98,9 +100,7 @@ const Register = () => {
 
                 <input
                     placeholder="Dirección"
-                    {...register("address", {
-                        required: 'La dirección es obligatoria'
-                    })}
+                    {...register("address")}
                     className="inputRegister"
                 />
                 {errors.address && <span className="errorText">{errors.address.message}</span>}
