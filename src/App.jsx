@@ -14,8 +14,9 @@ import PrivateRoute from './components/PrivateRoute/PrivateRoute';
 import PublicRoute from './components/PrivateRoute/PublicRoute';
 import WhatsAppButton from './components/WhatsappButton/WhatsAppButton';
 import ModalReutilizable from './components/ModalReutilizable/ModalReutilizable';
-
-
+import PromoEdit from './assets/images/promoEdit.jpg'
+import ForgotPassword from './components/pages/user/ForgotPassword/Forgot-password';
+import ResetPassword from './components/pages/user/ResetPassword/ResetPassword';
 // Dynamically import components
 const Landing = lazy(() => import('./components/pages/Landing/Landing'));
 const ProductDetail = lazy(() => import('./components/pages/ProductDetail/ProductDetail'));
@@ -48,7 +49,7 @@ function App() {
       </div>
       {isModalOpen && (
         <ModalReutilizable
-          imageUrl="/promoEdit.jpg"
+          imageUrl={PromoEdit}
           altText="Promocion de agosto"
           closeModal={closeModal}
         />
@@ -64,6 +65,8 @@ function App() {
           <Route path='/register' element={<PublicRoute element={<Register />} />} />
           <Route path='/dashboard' element={<PrivateRoute component={Dashboard} requiredRole='admin' />} />
           <Route path='/create-product' element={<PrivateRoute component={CreateProduct} requiredRole='admin' />} />
+          <Route path='/forgot-password' element={<ForgotPassword />} />
+          <Route path='/reset-password' element={<ResetPassword/>} /> 
         </Routes>
       </Suspense>
       <WhatsAppButton />

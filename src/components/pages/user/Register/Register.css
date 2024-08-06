@@ -1,0 +1,124 @@
+.mainRegister {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    width: 100%;
+    max-width: 500px;
+    background-color: #ffffff;
+    margin: 0 auto;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formRegister {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 1rem;
+}
+
+.formTitle {
+    margin-bottom: 1rem;
+    color: #333;
+    font-size: 1.5rem;
+    text-align: center;
+}
+
+.inputRegister {
+    padding: 0.75rem;
+    font-size: 1rem;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
+}
+
+
+.inputRegister:focus {
+    border: 2px solid #25D366;
+    outline: none;
+}
+
+.btnRegister {
+    padding: 0.75rem;
+    font-size: 1rem;
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.5s ease;
+}
+
+.btnRegister:hover {
+    background-color: #25D366;
+}
+
+.errorText {
+    color: red;
+    font-size: 0.875rem;
+   
+}
+
+.successMessage {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.linkToLogin {
+    margin-top: 1rem;
+    text-align: center;
+}
+
+.linkToLogin a {
+    color: grey;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.linkToLogin a:hover {
+    color: #25D366;
+}
+
+
+/* Responsive styles */
+@media (max-width: 768px) {
+    .mainRegister {
+        padding: 1rem;
+    }
+
+    .formRegister {
+        gap: 0.75rem;
+    }
+
+    .inputRegister,
+    .btnRegister {
+        font-size: 0.875rem;
+        padding: 0.5rem;
+    }
+
+    .formTitle {
+        font-size: 1.25rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .mainRegister {
+        padding: 0.5rem;
+    }
+
+    .formRegister {
+        gap: 0.5rem;
+    }
+
+    .inputRegister,
+    .btnRegister {
+        font-size: 0.75rem;
+        padding: 0.5rem;
+    }
+
+    .formTitle {
+        font-size: 1rem;
+    }
+}

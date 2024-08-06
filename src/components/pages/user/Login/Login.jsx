@@ -1,5 +1,5 @@
 import { useForm } from "react-hook-form";
-import { useNavigate } from "react-router-dom";
+import { NavLink, useNavigate } from "react-router-dom";
 import './Login.css';
 import { setToken } from "../../../../utils/auth";
 import { fetchData } from "../../../../utils/api";
@@ -62,9 +62,13 @@ const Login = () => {
                         />
                         {errors.password && <span className="errorMessage">{errors.password.message}</span>}
 
+                       <div className="divForm">
+                        <NavLink to={'/forgot-password'} className='linkRegister' >Olvide mi contraseña</NavLink> 
+                        <NavLink to={'/register'} className='linkRegister'>Registrarse</NavLink> 
+                        </div>
                         {serverError && <span className="serverError">{serverError}</span>}
-
                         <input type="submit" className="btnLogin" value="Iniciar Sesión" />
+                       
                     </form>
                 </main>}
         </>
