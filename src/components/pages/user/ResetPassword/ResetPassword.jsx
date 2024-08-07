@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { fetchData } from '../../../../utils/api';
 import './ResetPassword.css';
@@ -18,7 +18,6 @@ const ResetPassword = () => {
         const queryParams = new URLSearchParams(location.search);
         const tokenFromQuery = queryParams.get('token');
         setToken(tokenFromQuery);
-
     }, [location.search]);
 
     const handleSubmit = async (e) => {
@@ -42,8 +41,8 @@ const ResetPassword = () => {
             setErrorMessage('');
 
             setTimeout(() => {
-                navigate('/login'); // Usa navigate para redirigir
-            }, 3000); // Redirige después de 3 segundos
+                navigate('/login');
+            }, 3000);
         } catch (error) {
             setErrorMessage('Error al restablecer la contraseña.');
             setSuccessMessage('');

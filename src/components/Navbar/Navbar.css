@@ -6,6 +6,17 @@
     height: fit-content;
     padding-block: 1rem;
 }
+.container-fluid{
+    padding-inline: 10rem;
+}
+.divCarrousel{
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    height: fit-content;
+    font-weight: 500;
+    width: 100%;
+}
 
 .navList {
     display: flex;
@@ -46,6 +57,9 @@ li:hover {
         flex-direction: column;
         align-items: center;
     }
+    .container-fluid{
+        padding-inline: 2rem;
+    }
 
     .navItems {
         padding: 0.5rem 0; /* Agregar padding vertical para separación entre elementos */
@@ -65,6 +79,9 @@ li:hover {
         padding: 0;
         width: fit-content;
         
+    }
+    .container-fluid{
+       padding-inline:1rem
     }
     p {
         font-size: 0.9rem; /* Reducir tamaño de texto */

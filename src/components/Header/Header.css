@@ -6,14 +6,14 @@
 }
 
 .infoGeneral {
-    display: flex;
-    justify-content: center;
-    margin: 0 auto;
-    padding-block: 0.5rem;
-    background-color: black;
-    color: white;
-    height: fit-content;
-    width: 100%;
+    
+    margin-top: 10rem;
+}
+
+.logo {
+    width: 8rem;
+    height: 8rem;
+    padding: 0;
 }
 
 mark {
@@ -22,11 +22,7 @@ mark {
     font-size: 800;
 }
 
-.logo {
-    width: 12.5rem;
-    height: 12.5rem;
-    padding: 0;
-}
+
 
 
 @media (max-width:480px) {

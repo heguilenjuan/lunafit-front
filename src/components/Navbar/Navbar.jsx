@@ -1,23 +1,18 @@
+/* eslint-disable no-unused-vars */
 import './Navbar.css';
 import { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { getToken, getRoleFromToken, clearToken } from '../../utils/auth';
+import Cart from '../../assets/icons/cart.svg';
+import CartFilled from '../../assets/icons/cart-filled.svg';
+import MoonField from '../../assets/icons/moonField.svg';
+import Logo from '../../assets/images/logo.webp'
+import CarrouselTitle from '../Header/CarrouselTitle/CarrouselTitle';
 
-
-import MoonField from '../../assets/icons/moonField.svg'
 const Navbar = () => {
+
     const [hoveredItem, setHoveredItem] = useState(null);
-    const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
     const navigate = useNavigate();
-
-    useEffect(() => {
-        const handleResize = () => {
-            setIsMobile(window.innerWidth <= 480);
-        };
-
-        window.addEventListener('resize', handleResize);
-        return () => window.removeEventListener('resize', handleResize);
-    }, []);
 
     const handleMouseEnter = (index) => {
         setHoveredItem(index);
@@ -34,64 +29,67 @@ const Navbar = () => {
     };
 
     const token = getToken();
-    const role = token ? getRoleFromToken(token) : null;
+    const dataToken = token ? getRoleFromToken(token) : null;
+    const role = dataToken?.role || null;
+    const userId = dataToken?.userId || null;
 
     const navItems = [
-        { text: "INICIO", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/' },
-        { text: "PRODUCTOS", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/products' },
-        { text: "CONTACTO", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/contact' },
-        ...(token ? [
-            role === 'admin' ? { text: "PANEL ADMINISTRADOR", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/dashboard' } : null,
-            { text: "CERRAR SESIÓN", icon: "/icons/moon.svg", iconHovered: MoonField, to: '#', onClick: handleLogout }
-        ] : [
-            { text: "LOGIN/REGISTER", icon: "/icons/moon.svg", iconHovered: MoonField, to: '/login' }
+        { text: "INICIO", to: '/' },
+        { text: "PRODUCTOS", to: '/products' },
+        { text: "CONTACTO", to: '/contact' },
+        ...(token ? (
+            role === 'admin' ? [
+                { text: "PANEL ADMINISTRADOR", to: '/dashboard' },
+                { text: "CERRAR SESIÓN", to: '#', onClick: handleLogout }
+            ] : [
+                { text: "CARRITO", to: `/cart/${userId}` },
+                { text: "CERRAR SESIÓN", to: '#', onClick: handleLogout }
+            ]
+        ) : [
+            { text: "LOGIN/REGISTER", to: '/login' }
         ])
-    ].filter(Boolean);
+    ];
 
     return (
-        <nav className='navContainer'>
-            {isMobile ? (
-                <div className="btn-group">
-                    <button className="btn btn-secondary btn-sm dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        Menú
-                    </button>
-                    <ul className="dropdown-menu">
-                        {navItems.map((item, index) => (
-                            <li key={index}>
-                                <Link className='navItems' to={item.to} onClick={item.onClick}>
-                                    <img
-                                        src={hoveredItem === index ? item.iconHovered : item.icon}
-                                        alt="moonSvg"
-                                        width={15}
-                                        height={15}
-                                    />
-                                    <p>{item.text}</p>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+        <nav className="navbar bg-body-tertiary fixed-top">
+            <div className='divCarrousel'>
+                <CarrouselTitle/>
+            </div>
+            <div className="container-fluid">
+                <Link className="navbar-brand" to="/">
+                    <img className='logo' src={Logo} alt='Logo' />
+                </Link>
+                <button className="navbar-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasNavbar" aria-controls="offcanvasNavbar" aria-label="Toggle navigation">
+                    <span className="navbar-toggler-icon"></span>
+                </button>
+                <div className="offcanvas offcanvas-end" tabIndex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
+                    <div className="offcanvas-header">
+                        <h5 className="offcanvas-title" id="offcanvasNavbarLabel">LunaFit indumentaria</h5>
+                        <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+                    </div>
+                    <div className="offcanvas-body">
+                        <ul className="navbar-nav justify-content-end flex-grow-1 pe-3">
+                            {navItems.map((item, index) => (
+                                <li className="nav-item" key={index}>
+                                    <Link
+                                        className={`nav-link ${item.to === window.location.pathname ? 'active' : ''}`}
+                                        to={item.to}
+                                        onClick={item.onClick}
+                                        onMouseEnter={() => handleMouseEnter(index)}
+                                        onMouseLeave={handleMouseLeave}
+                                    >
+                                        {item.text}
+                                    </Link>
+                                </li>
+                            ))}
+                        </ul>
+                        {/* <form className="d-flex mt-3" role="search">
+                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search"/>
+                            <button className="btn btn-outline-success" type="submit">Search</button>
+                        </form> */}
+                    </div>
                 </div>
-            ) : (
-                <ul className='navList'>
-                    {navItems.map((item, index) => (
-                        <li
-                            key={index}
-                            onMouseEnter={() => handleMouseEnter(index)}
-                            onMouseLeave={handleMouseLeave}
-                        >
-                            <Link className='navItems' to={item.to} onClick={item.onClick}>
-                                <img
-                                    src={hoveredItem === index ? item.iconHovered : item.icon}
-                                    alt="moonSvg"
-                                    width={15}
-                                    height={15}
-                                />
-                                <p>{item.text}</p>
-                            </Link>
-                        </li>
-                    ))}
-                </ul>
-            )}
+            </div>
         </nav>
     );
 };

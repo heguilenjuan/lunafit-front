@@ -17,6 +17,9 @@ import ModalReutilizable from './components/ModalReutilizable/ModalReutilizable'
 import PromoEdit from './assets/images/promoEdit.jpg'
 import ForgotPassword from './components/pages/user/ForgotPassword/Forgot-password';
 import ResetPassword from './components/pages/user/ResetPassword/ResetPassword';
+import Cart from './components/pages/Cart/Cart';
+
+
 // Dynamically import components
 const Landing = lazy(() => import('./components/pages/Landing/Landing'));
 const ProductDetail = lazy(() => import('./components/pages/ProductDetail/ProductDetail'));
@@ -66,7 +69,9 @@ function App() {
           <Route path='/dashboard' element={<PrivateRoute component={Dashboard} requiredRole='admin' />} />
           <Route path='/create-product' element={<PrivateRoute component={CreateProduct} requiredRole='admin' />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
-          <Route path='/reset-password' element={<ResetPassword/>} /> 
+          <Route path='/reset-password' element={<ResetPassword />} />
+          <Route path='/cart/:userId' element={<Cart />} />
+
         </Routes>
       </Suspense>
       <WhatsAppButton />

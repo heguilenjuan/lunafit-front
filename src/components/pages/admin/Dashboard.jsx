@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchProducts, deleteProduct, updateProduct } from '../../../redux/productsSlice';
@@ -14,6 +15,9 @@ const Dashboard = () => {
   const products = useSelector((state) => state.products.items);
   const productStatus = useSelector((state) => state.products.status);
   const error = useSelector((state) => state.products.error);
+  const totalPages = useSelector((state) => state.products.totalPages);
+  const currentPage = useSelector((state) => state.products.currentPage);
+  
   const [showConfirm, setShowConfirm] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -29,12 +33,16 @@ const Dashboard = () => {
     imageOne: '',
     imageTwo: ''
   });
+  
+  const [page, setPage] = useState(currentPage);
+  const [filters, setFilters] = useState({
+    category: [], // Puedes ajustar estos valores según tus filtros
+    size: []
+  });
 
   useEffect(() => {
-    if (productStatus === 'idle') {
-      dispatch(fetchProducts());
-    }
-  }, [productStatus, dispatch]);
+    dispatch(fetchProducts({ page, filters }));
+  }, [dispatch, page, filters]);
 
   const handleDelete = (productId) => {
     setProductToDelete(productId);
@@ -91,12 +99,17 @@ const Dashboard = () => {
       .unwrap()
       .then(() => {
         setEditingProduct(null);
-        dispatch(fetchProducts()); // Refresca la lista de productos
-        // handleDelete(id) // Esta línea parece incorrecta, puede ser removida
+        dispatch(fetchProducts({ page, filters }));
       })
       .catch((error) => {
-        console.error('Error updating product:', error.message); // Imprime el mensaje de error
+        console.error('Error updating product:', error.message);
       });
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
+    }
   };
 
   return (
@@ -149,6 +162,11 @@ const Dashboard = () => {
               )}
             </div>
           ))}
+          <div className="pagination">
+            <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Anterior</button>
+            <span>Página {page} de {totalPages}</span>
+            <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>Siguiente</button>
+          </div>
         </div>
       )}
       {productStatus === 'failed' && <div>{error}</div>}

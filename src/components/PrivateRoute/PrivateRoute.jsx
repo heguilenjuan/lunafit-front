@@ -4,7 +4,7 @@ import { getToken, getRoleFromToken } from '../../utils/auth';
 
 const PrivateRoute = ({ component: Component, requiredRole, ...rest }) => {
     const token = getToken();
-    const role = token ? getRoleFromToken(token) : null;
+    const role = token ? getRoleFromToken(token).role : null;
     if (!token) {
         return <Navigate to="/login" />;
     }

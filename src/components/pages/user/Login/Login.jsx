@@ -1,18 +1,21 @@
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
 import './Login.css';
-import { setToken } from "../../../../utils/auth";
+import { getRoleFromToken, setToken } from "../../../../utils/auth";
 import { fetchData } from "../../../../utils/api";
 import { useState } from "react";
 
 
 import Spinner from "../../../Spinner/Spinner";
+import { useDispatch } from "react-redux";
+import { fetchUserData } from "../../../../redux/userSlice";
 
 const Login = () => {
     const [loading, setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const [serverError, setServerError] = useState('');
+    const dispatch = useDispatch();
 
     const onSubmit = async (data) => {
         setLoading(true);
@@ -32,6 +35,9 @@ const Login = () => {
             }
 
             setToken(result.token);
+            const { userId } = getRoleFromToken(result.token);
+            dispatch(fetchUserData(userId));
+
             setLoading(false);
             navigate('/');
 
@@ -62,13 +68,13 @@ const Login = () => {
                         />
                         {errors.password && <span className="errorMessage">{errors.password.message}</span>}
 
-                       <div className="divForm">
-                        <NavLink to={'/forgot-password'} className='linkRegister' >Olvide mi contraseña</NavLink> 
-                        <NavLink to={'/register'} className='linkRegister'>Registrarse</NavLink> 
+                        <div className="divForm">
+                            <NavLink to={'/forgot-password'} className='linkRegister' >Olvide mi contraseña</NavLink>
+                            <NavLink to={'/register'} className='linkRegister'>Registrarse</NavLink>
                         </div>
                         {serverError && <span className="serverError">{serverError}</span>}
                         <input type="submit" className="btnLogin" value="Iniciar Sesión" />
-                       
+
                     </form>
                 </main>}
         </>
