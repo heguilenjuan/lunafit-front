@@ -17,7 +17,7 @@ const Dashboard = () => {
   const error = useSelector((state) => state.products.error);
   const totalPages = useSelector((state) => state.products.totalPages);
   const currentPage = useSelector((state) => state.products.currentPage);
-  
+
   const [showConfirm, setShowConfirm] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
@@ -25,15 +25,14 @@ const Dashboard = () => {
     name: '',
     price: '',
     description: '',
-    size: '',
     category: '',
     offer: '',
-    stock: '',
+    sizes: [],
     image: '',
     imageOne: '',
     imageTwo: ''
   });
-  
+
   const [page, setPage] = useState(currentPage);
   const [filters, setFilters] = useState({
     category: [], // Puedes ajustar estos valores según tus filtros
@@ -74,10 +73,9 @@ const Dashboard = () => {
       name: product.name,
       price: product.price,
       description: product.description || '',
-      size: product.size.join(',') || '',
       category: product.category || '',
       offer: product.offer || '',
-      stock: product.stock || '',
+      sizes: product.sizes || [],  // Adjusted to handle sizes array
       image: product.image || '',
       imageOne: product.imageOne || '',
       imageTwo: product.imageTwo || ''
@@ -86,13 +84,25 @@ const Dashboard = () => {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setEditedProduct({ ...editedProduct, [name]: value });
+    if (name === 'sizes') {
+      // Convert sizes input to array format
+      const sizesArray = value.split('\n').map(line => {
+        const [size, stock] = line.split(',').map(part => part.trim());
+        return { size, stock: Number(stock) || 0 }; // Convert stock to number
+      });
+      setEditedProduct({ ...editedProduct, sizes: sizesArray });
+    } else {
+      setEditedProduct({ ...editedProduct, [name]: value });
+    }
   };
 
   const handleEditSubmit = (productId) => {
     const updatedProduct = {
       ...editedProduct,
-      size: editedProduct.size.split(',').map(s => s.trim())
+      sizes: editedProduct.sizes.map(sizeObj => ({
+        size: sizeObj.size,
+        stock: sizeObj.stock
+      }))
     };
 
     dispatch(updateProduct({ id: productId, ...updatedProduct }))
@@ -125,13 +135,15 @@ const Dashboard = () => {
                 <div className="product-info">
                   <h5 className="product-name">{product.name}</h5>
                   <p className="product-price">Precio: <b>${product.price}</b></p>
-                  <p className="product-stock">Stock: <b>{product.stock}</b></p>
+                  <p className="product-stock">Stock: <b>{product.sizes.reduce((acc, size) => acc + size.stock, 0)}</b></p>
                   <p>Descuento: <b>{product.offer}</b></p>
                   <div className='product-size'>
                     <p>Talles:</p>
                     <div className='sizes'>
-                      {product.size.map((item, index) => (
-                        <span key={index}><b>{item}</b></span>
+                      {product.sizes.map((sizeObj, index) => (
+                        <div key={index}>
+                          <span><b>{sizeObj.size}</b>: {sizeObj.stock}</span>
+                        </div>
                       ))}
                     </div>
                   </div>
@@ -156,7 +168,7 @@ const Dashboard = () => {
                   producto={product}
                   editedProducto={editedProduct}
                   handleEditChange={handleEditChange}
-                  handleEditSubmit={handleEditSubmit}
+                  handleEditSubmit={() => handleEditSubmit(product._id)}
                   setEditingProduct={setEditingProduct}
                 />
               )}

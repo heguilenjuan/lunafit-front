@@ -16,6 +16,8 @@ const ProductDetail = () => {
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
 
+
+    console.log(product);
     useEffect(() => {
         const fetchedProduct = products.find(product => product._id === id);
         if (fetchedProduct) {

@@ -1,18 +1,39 @@
-// components/EditComponent/EditComponent.js
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from 'react';
 
 // eslint-disable-next-line react/prop-types
 const EditComponent = ({ producto, editedProducto, handleEditChange, handleEditSubmit, setEditingProduct }) => {
 
-  const product = producto;
   const editedProduct = editedProducto;
+
+  // Crear un estado para manejar el stock por tamaño
+  const [stockBySize, setStockBySize] = useState({});
+
+  useEffect(() => {
+    // Inicializar stockBySize con los valores del producto cuando el componente se monta
+    const initialStockBySize = {};
+    producto.sizes.forEach(({ size, stock }) => {
+      initialStockBySize[size] = stock;
+    });
+    setStockBySize(initialStockBySize);
+  }, [producto.sizes]);
+
+  const handleStockChange = (size, value) => {
+    setStockBySize(prevStock => ({
+      ...prevStock,
+      [size]: Number(value), // Asegurarse de que el valor sea numérico
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Añadir stockBySize al objeto editedProduct antes de enviarlo
+    handleEditSubmit({ ...editedProduct, sizes: Object.keys(stockBySize).map(size => ({ size, stock: stockBySize[size] })) });
+  };
+
   return (
     <div className="accordion-body">
-      <form
-        onSubmit={(e) => {
-          e.preventDefault();
-          handleEditSubmit(product._id);
-        }}
-      >
+      <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label htmlFor="name"><b>Name</b></label>
           <input
@@ -46,15 +67,20 @@ const EditComponent = ({ producto, editedProducto, handleEditChange, handleEditS
           />
         </div>
         <div className="form-group">
-          <label htmlFor="size"><b>Size</b> (comma separated)</label>
-          <input
-            type="text"
-            id="size"
-            name="size"
-            value={editedProduct.size}
-            onChange={handleEditChange}
-            className="form-control"
-          />
+          <label htmlFor="size"><b>Sizes</b></label>
+          {['S', 'M', 'L', 'XL', '1/2', '3/4'].map(size => (
+            <div key={size}>
+              <label>{size}</label>
+              <input
+                type="number"
+                name={`stock-${size}`}
+                value={stockBySize[size] || 0} // Usar el valor de stockBySize para cada tamaño
+                onChange={(e) => handleStockChange(size, e.target.value)}
+                className="form-control"
+                placeholder={`Stock for ${size}`}
+              />
+            </div>
+          ))}
         </div>
         <div className="form-group">
           <label htmlFor="category"><b>Category</b></label>
@@ -74,17 +100,6 @@ const EditComponent = ({ producto, editedProducto, handleEditChange, handleEditS
             id="offer"
             name="offer"
             value={editedProduct.offer}
-            onChange={handleEditChange}
-            className="form-control"
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="stock"><b>Stock</b></label>
-          <input
-            type="number"
-            id="stock"
-            name="stock"
-            value={editedProduct.stock}
             onChange={handleEditChange}
             className="form-control"
           />
