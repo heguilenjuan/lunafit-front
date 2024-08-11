@@ -15,9 +15,8 @@ const ProductDetail = () => {
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
+    const [selectedStock, setSelectedStock] = useState(null);
 
-
-    console.log(product);
     useEffect(() => {
         const fetchedProduct = products.find(product => product._id === id);
         if (fetchedProduct) {
@@ -39,6 +38,8 @@ const ProductDetail = () => {
 
     const handleSizeClick = (size) => {
         setSelectedSize(size);
+        const sizeDetails = product?.sizes.find(sizeAndStock => sizeAndStock.size === size);
+        setSelectedStock(sizeDetails?.stock || 0);
     };
 
     const phoneNumber = '+542914429530';
@@ -54,7 +55,7 @@ const ProductDetail = () => {
     }
 
     if (!product) {
-        return <Spinner/>;
+        return <Spinner />;
     }
 
     const handlePrice = (price, offer) => {
@@ -114,19 +115,21 @@ const ProductDetail = () => {
                     <div className='details'>
                         <h3 className='titleDetails'>Talles:</h3>
                         <div className='detailsSize'>
-                            {product?.size.map((size, index) => (
-                                <span
-                                    key={index}
-                                    className={selectedSize === size ? 'active' : ''}
-                                    onClick={() => handleSizeClick(size)}
-                                >
-                                    {size}
-                                </span>
-                            ))}
+                            {product?.sizes
+                                .filter(sizeAndStock => sizeAndStock.stock !== 0)
+                                .map((sizeAndStock, index) => (
+                                    <span
+                                        key={`sizeAndSotck${index}${sizeAndStock.size}`}
+                                        className={selectedSize === sizeAndStock.size ? 'active' : ''}
+                                        onClick={() => handleSizeClick(sizeAndStock.size)}
+                                    >
+                                        {sizeAndStock.size}
+                                    </span>
+                                ))}
                         </div>
                         <div className='boxStock'>
                             <span className='textStock'>Stock</span>
-                            <span className='stockNumber'>{product?.stock}</span>
+                            <span className='stockNumber'>{selectedStock !== null ? selectedStock : product?.stock}</span>
                         </div>
                         {product?.description && (
                             <div className='description'>

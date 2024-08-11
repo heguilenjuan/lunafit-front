@@ -53,6 +53,7 @@ export const updateProduct = createAsyncThunk(
                 formData.append(key, updatedProduct[key]);
             }
         }
+        console.log(id, updatedProduct);
 
         const response = await fetchData(`api/product/${id}`, {
             method: 'PUT',

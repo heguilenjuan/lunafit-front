@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchProducts, deleteProduct, updateProduct } from '../../../redux/productsSlice';
@@ -21,21 +20,11 @@ const Dashboard = () => {
   const [showConfirm, setShowConfirm] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
-  const [editedProduct, setEditedProduct] = useState({
-    name: '',
-    price: '',
-    description: '',
-    category: '',
-    offer: '',
-    sizes: [],
-    image: '',
-    imageOne: '',
-    imageTwo: ''
-  });
+  const [editedProduct, setEditedProduct] = useState({});
 
   const [page, setPage] = useState(currentPage);
   const [filters, setFilters] = useState({
-    category: [], // Puedes ajustar estos valores según tus filtros
+    category: [],
     size: []
   });
 
@@ -70,12 +59,13 @@ const Dashboard = () => {
   const handleEdit = (product) => {
     setEditingProduct(product._id);
     setEditedProduct({
+      id: product._id,
       name: product.name,
       price: product.price,
       description: product.description || '',
       category: product.category || '',
-      offer: product.offer || '',
-      sizes: product.sizes || [],  // Adjusted to handle sizes array
+      offer: product.offer || false,
+      sizes: product.sizes || [],
       image: product.image || '',
       imageOne: product.imageOne || '',
       imageTwo: product.imageTwo || ''
@@ -85,10 +75,9 @@ const Dashboard = () => {
   const handleEditChange = (e) => {
     const { name, value } = e.target;
     if (name === 'sizes') {
-      // Convert sizes input to array format
       const sizesArray = value.split('\n').map(line => {
         const [size, stock] = line.split(',').map(part => part.trim());
-        return { size, stock: Number(stock) || 0 }; // Convert stock to number
+        return { size, stock: Number(stock) || 0 };
       });
       setEditedProduct({ ...editedProduct, sizes: sizesArray });
     } else {
@@ -96,16 +85,8 @@ const Dashboard = () => {
     }
   };
 
-  const handleEditSubmit = (productId) => {
-    const updatedProduct = {
-      ...editedProduct,
-      sizes: editedProduct.sizes.map(sizeObj => ({
-        size: sizeObj.size,
-        stock: sizeObj.stock
-      }))
-    };
-
-    dispatch(updateProduct({ id: productId, ...updatedProduct }))
+  const handleEditSubmit = () => {
+    dispatch(updateProduct(editedProduct))
       .unwrap()
       .then(() => {
         setEditingProduct(null);
@@ -134,11 +115,11 @@ const Dashboard = () => {
                 <img src={product.image} alt={product.name} className="product-image" />
                 <div className="product-info">
                   <h5 className="product-name">{product.name}</h5>
-                  <p className="product-price">Precio: <b>${product.price}</b></p>
+                  <p className="product-price">Price: <b>${product.price}</b></p>
                   <p className="product-stock">Stock: <b>{product.sizes.reduce((acc, size) => acc + size.stock, 0)}</b></p>
-                  <p>Descuento: <b>{product.offer}</b></p>
+                  <p>Discount: <b>{product.offer ? 'Yes' : 'No'}</b></p>
                   <div className='product-size'>
-                    <p>Talles:</p>
+                    <p>Sizes:</p>
                     <div className='sizes'>
                       {product.sizes.map((sizeObj, index) => (
                         <div key={index}>
@@ -149,35 +130,28 @@ const Dashboard = () => {
                   </div>
                 </div>
                 <div className="product-actions">
-                  <button
-                    onClick={() => handleEdit(product)}
-                    className="btn"
-                  >
+                  <button onClick={() => handleEdit(product)} className="btn">
                     <img src={EditIcon} alt="Edit" className="icon" />
                   </button>
-                  <button
-                    onClick={() => handleDelete(product._id)}
-                    className="btn"
-                  >
+                  <button onClick={() => handleDelete(product._id)} className="btn">
                     <img src={DeleteIcon} alt="Delete" className="icon" />
                   </button>
                 </div>
               </div>
               {editingProduct === product._id && (
                 <EditComponent
-                  producto={product}
-                  editedProducto={editedProduct}
+                  producto={editedProduct}
                   handleEditChange={handleEditChange}
-                  handleEditSubmit={() => handleEditSubmit(product._id)}
+                  handleEditSubmit={handleEditSubmit}
                   setEditingProduct={setEditingProduct}
                 />
               )}
             </div>
           ))}
           <div className="pagination">
-            <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Anterior</button>
-            <span>Página {page} de {totalPages}</span>
-            <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>Siguiente</button>
+            <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Previous</button>
+            <span>Page {page} of {totalPages}</span>
+            <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>Next</button>
           </div>
         </div>
       )}

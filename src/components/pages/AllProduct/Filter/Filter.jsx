@@ -33,6 +33,8 @@ const Filter = ({ filters, setFilters }) => {
         });
     };
 
+    console.log(filters)
+
     const filterContent = (
         <div className="filter-content">
             <div className="filter-section">
@@ -84,6 +86,26 @@ const Filter = ({ filters, setFilters }) => {
 
                 <div className="filter-subsection">
                     <label>Talle</label>
+                    <div className="filter-item">
+                        <input
+                            type="checkbox"
+                            name="size"
+                            value="1/2"
+                            onChange={handleCheckboxChange}
+                            checked={filters.size.includes("1/2")}
+                        />
+                        <label>1/2</label>
+                    </div>
+                    <div className="filter-item">
+                        <input
+                            type="checkbox"
+                            name="size"
+                            value="3/4"
+                            onChange={handleCheckboxChange}
+                            checked={filters.size.includes("3/4")}
+                        />
+                        <label>3/4</label>
+                    </div>
                     <div className="filter-item">
                         <input
                             type="checkbox"

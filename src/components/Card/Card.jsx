@@ -12,8 +12,15 @@ const Card = ({ data }) => {
     const handleMouseEnter = () => setHovered(true);
     const handleMouseLeave = () => setHovered(false);
 
-    const handleClick = () => {
-        dispatch(selectProduct(data));
+    // Verificar si el producto tiene stock en algún talle
+    const isOutOfStock = data.sizes.every(size => size.stock === 0);
+
+    const handleClick = (e) => {
+        if (isOutOfStock) {
+            e.preventDefault(); // Prevenir la navegación si está agotado
+        } else {
+            dispatch(selectProduct(data));
+        }
     };
 
     const handlePrice = (price, offer) => {
@@ -32,8 +39,13 @@ const Card = ({ data }) => {
     const discountPercentage = discountedPrice ? calculateDiscountPercentage(originalPrice, discountedPrice) : null;
 
     return (
-        <div className='cardContainer boxCard'>
-            <Link to={`/product/${data._id}`} className='cardLink' onClick={handleClick}>
+        <div className={`cardContainer boxCard ${isOutOfStock ? 'out-of-stock' : ''}`}>
+            <Link 
+                to={isOutOfStock ? '#' : `/product/${data._id}`} 
+                className='cardLink' 
+                onClick={handleClick}
+                style={{ pointerEvents: isOutOfStock ? 'none' : 'auto' }}
+            >
                 <img
                     className='cardImage'
                     src={hovered ? data.imageOne : data.image}
@@ -57,6 +69,11 @@ const Card = ({ data }) => {
                     )}
                 </div>
             </Link>
+            {isOutOfStock && (
+                <div className='out-of-stock-overlay'>
+                    <span>Sin Stock</span>
+                </div>
+            )}
         </div>
     );
 };

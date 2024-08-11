@@ -39,7 +39,7 @@ const AllProducts = () => {
         if (currentPage > 1) {
             setCurrentPage(1);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [filters]);
 
     const handlePageChange = (page) => {
