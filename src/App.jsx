@@ -19,7 +19,7 @@ import ForgotPassword from './components/pages/user/ForgotPassword/Forgot-passwo
 import ResetPassword from './components/pages/user/ResetPassword/ResetPassword';
 import Cart from './components/pages/Cart/Cart';
 import KnowUs from './components/pages/knowus/Knowus';
-import Shipping from './components/pages/shippingPol/Shipping';
+import ChangePolicy from './components/pages/ChangePolicy/ChangePolicy';
 
 // Dynamically import components
 const Landing = lazy(() => import('./components/pages/Landing/Landing'));
@@ -70,7 +70,7 @@ function App() {
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
           <Route path='/conocenos' element={<KnowUs/>}/>
-          <Route path='/shipping' element={<Shipping/>} />
+          <Route path='/change-policy' element={<ChangePolicy/>} />
           <Route path='/cart/:cartId' element={<PrivateRoute component={Cart} />} />
         </Routes>
       </Suspense>

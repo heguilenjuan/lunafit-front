@@ -34,7 +34,7 @@ const Navbar = () => {
         { text: "INICIO", to: '/' },
         { text: "PRODUCTOS", to: '/products' },
         { text: "QUIENES SOMOS", to: '/conocenos' },
-        { text: "POLITICAS DE ENVIO", to: '/shipping' },
+        { text: "POLITICAS DE CAMBIO", to: '/change-policy' },
         ...(token ? (
             role === 'admin' ? [
                 { text: "PANEL ADMINISTRADOR", to: '/dashboard' },

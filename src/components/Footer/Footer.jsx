@@ -22,7 +22,7 @@ const Footer = () => {
                 <div className='boxNavigate'>
                     <h3>Navegacion</h3>
                     <NavLink to={'/conocenos'}>Conocenos</NavLink>
-                    <NavLink to={'/shipping'}>Politicas de envio</NavLink>
+                    <NavLink to={'/change-policy'}>Politicas de cambio</NavLink>
                     <NavLink to={'/login'}>Iniciar sesión</NavLink>
                 </div>
                 <div className='boxContactFooter'>

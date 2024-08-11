@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { fetchData } from '../../../../utils/api';
+import { Link } from 'react-router-dom';
 import './ForgotPassword.css';
 
 const ForgotPassword = () => {
@@ -41,6 +42,9 @@ const ForgotPassword = () => {
         />
         <button type="submit" className="submit-button">Enviar Enlace</button>
       </form>
+      <div className="linkToLogin">
+                ¿Ya tienes una cuenta? <Link to="/login">Volver al login</Link>
+      </div>
       {errorMessage && <div className="error-message">{errorMessage}</div>}
       {successMessage && <div className="success-message">{successMessage}</div>}
     </div>
