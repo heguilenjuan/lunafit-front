@@ -20,6 +20,7 @@ import ResetPassword from './components/pages/user/ResetPassword/ResetPassword';
 import Cart from './components/pages/Cart/Cart';
 import KnowUs from './components/pages/knowus/Knowus';
 import ChangePolicy from './components/pages/ChangePolicy/ChangePolicy';
+import VerifyEmail from './components/pages/user/VerifyEmail/VerifyEmail';
 
 // Dynamically import components
 const Landing = lazy(() => import('./components/pages/Landing/Landing'));
@@ -72,6 +73,7 @@ function App() {
           <Route path='/conocenos' element={<KnowUs/>}/>
           <Route path='/change-policy' element={<ChangePolicy/>} />
           <Route path='/cart/:cartId' element={<PrivateRoute component={Cart} />} />
+          <Route path='/verify-email' element={<VerifyEmail/>} />
         </Routes>
       </Suspense>
       <WhatsAppButton />
