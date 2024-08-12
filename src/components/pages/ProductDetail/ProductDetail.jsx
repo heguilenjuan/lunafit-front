@@ -11,6 +11,7 @@ import Spinner from '../../Spinner/Spinner';
 import Swal from 'sweetalert2';
 import { getToken } from '../../../utils/auth';
 import NavDetail from './Nav/NavDetail';
+import { fetchData } from '../../../utils/api';
 
 const ProductDetail = () => {
     const { id } = useParams();
@@ -59,20 +60,33 @@ const ProductDetail = () => {
     const message = `Hola, estoy interesada en el producto *${product?.name}*, quería coordinar para probármelo!.`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
 
-    // función para agregar al carrito
     const handleAddToCart = async () => {
         if (!selectedSize) {
-            alert('Por favor, selecciona un talle antes de añadir al carrito.');
+            Swal.fire('Error', 'Por favor, selecciona un talle antes de añadir al carrito.', 'error');
             return;
         }
+
         const token = getToken();
-        console.log(token);
-        if (token) {
-            const resultAction = await dispatch(addToCart({
-                productId: product._id,
-                size: selectedSize,
-                quantity: 1,
-            })).unwrap();
+        if (!token) {
+            Swal.fire('Error', 'Debes estar autenticado para añadir productos al carrito.', 'error');
+            return;
+        }
+
+        const productData = {
+            productId: product._id,
+            size: selectedSize,
+            quantity: 1,
+        };
+
+        try {
+            const data = await fetchData('api/cart', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${token}`
+                },
+                body: JSON.stringify(productData)
+            });
 
             Swal.fire({
                 position: 'bottom-end',
@@ -82,18 +96,19 @@ const ProductDetail = () => {
                 timer: 1500,
                 toast: true,
             });
-
-        } else {
+        } catch (error) {
+            console.error('Error al añadir el producto al carrito:', error);
             Swal.fire({
                 position: 'bottom-end',
                 icon: 'error',
-                text: 'Debes iniciar sesión primero',
+                text: 'El producto ya se encuentra en el carrito con ese Talle.',
                 showConfirmButton: false,
-                timer: 2000,
+                timer: 1500,
                 toast: true,
             });
         }
     };
+
 
     if (loading) {
         return <Spinner />;

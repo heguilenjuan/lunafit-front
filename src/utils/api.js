@@ -1,6 +1,5 @@
 export const fetchData = async (endpoint, options = {}) => {
     const url = import.meta.env.VITE_BACKEND_URL; // Asegúrate de que esta variable de entorno esté configurada correctamente
-
     const headers = {
         ...options.headers,
     };
@@ -16,15 +15,16 @@ export const fetchData = async (endpoint, options = {}) => {
             headers,
         });
 
-        // Respuesta como texto si no es JSON
         let data;
         try {
             data = await response.json();
-        } catch {
+        } catch (error) {
+            // Si la respuesta no es JSON, leer como texto
             data = await response.text();
         }
 
         if (!response.ok) {
+            console.error('Response error data:', data);
             throw new Error(data.error || `Error: ${response.status} - ${response.statusText}`);
         }
 

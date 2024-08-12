@@ -5,48 +5,58 @@ import { getRoleFromToken, setToken } from "../../../../utils/auth";
 import { fetchData } from "../../../../utils/api";
 import { useState } from "react";
 import Spinner from "../../../Spinner/Spinner";
-import { useDispatch } from "react-redux";
-import { fetchUserData } from "../../../../redux/userSlice";
 import EyeShow from "../../../../assets/icons/eye-open.svg";
 import EyeClose from '../../../../assets/icons/eye-closed.svg';
+
+
 const Login = () => {
     const [loading, setLoading] = useState(false);
     const { register, handleSubmit, formState: { errors } } = useForm();
     const navigate = useNavigate();
     const [serverError, setServerError] = useState('');
-    const dispatch = useDispatch();
-
     const [showPass, setShowPass] = useState(false);
-
     const onSubmit = async (data) => {
         setLoading(true);
         setServerError('');
+    
         try {
-            const result = await fetchData('api/users/login', {
+            // Enviar solicitud de inicio de sesión
+            const loginResult = await fetchData('api/users/login', {
                 method: "POST",
                 body: JSON.stringify({ mail: data.mail, password: data.password }),
                 headers: {
                     'Content-Type': 'application/json',
                 },
             });
-
-            if (!result.token) {
-                throw new Error(result.message || 'Mail o contraseña incorrectos.');
+    
+            // Verificar si se recibió un token
+            if (!loginResult.token) {
+                throw new Error(loginResult.message || 'Mail o contraseña incorrectos.');
             }
-
-            setToken(result.token);
-            const { userId } = getRoleFromToken(result.token);
-            dispatch(fetchUserData(userId));
-
-            setLoading(false);
+    
+            // Establecer el token y extraer datos del mismo
+            const token = loginResult.token;
+            setToken(token);
+    
+            const { userId } = getRoleFromToken(token);
+    
+            // Obtener datos del usuario
+            const userData = await fetchData(`api/users/${userId}`, { method: 'GET' });
+    
+            // Almacenar datos del usuario en sessionStorage
+            sessionStorage.setItem('userData', JSON.stringify(userData));
+    
+            // Navegar a la página principal
             navigate('/');
+            window.location.reload();
 
         } catch (error) {
-            setLoading(false);
             setServerError(error.message || 'Ocurrió un error al iniciar sesión.');
+        } finally {
+            setLoading(false);
         }
     };
-
+    
     return (
         <>
             {loading ? <Spinner />
@@ -68,7 +78,7 @@ const Login = () => {
                                 type={showPass ? "text" : "password"}
                             />
                             <img
-                                src={showPass ? `${ EyeShow }` : `${ EyeClose }`} /* Cambia la ruta al ícono SVG según tu estructura */
+                                src={showPass ? `${EyeShow}` : `${EyeClose}`} /* Cambia la ruta al ícono SVG según tu estructura */
                                 alt="Toggle Visibility"
                                 className="password-toggle"
                                 onClick={() => setShowPass(!showPass)}

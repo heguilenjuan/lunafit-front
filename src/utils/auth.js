@@ -2,15 +2,15 @@
 import { jwtDecode } from "jwt-decode";
 
 export const setToken = (token) => {
-  localStorage.setItem('token', token);
+  sessionStorage.setItem('token', token);
 };
 
 export const getToken = () => {
-  return localStorage.getItem('token');
+  return sessionStorage.getItem('token');
 };
 
 export const clearToken = () => {
-  localStorage.removeItem('token');
+  sessionStorage.clear('token');
 };
 
 export const getRoleFromToken = (token) => {

@@ -4,23 +4,43 @@ import { getToken, getRoleFromToken, clearToken } from '../../utils/auth';
 import Cart from '../../assets/icons/cart.svg';
 import Logo from '../../assets/images/logo.webp';
 import CarrouselTitle from '../Header/CarrouselTitle/CarrouselTitle';
-import { useSelector } from 'react-redux';
-import { setUserData } from '../../redux/userSlice';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
     const navigate = useNavigate();
+    const [role, setRole] = useState(null);
+    const [token, setToken] = useState();
+    const [userData, setUserData] = useState(JSON.parse(sessionStorage.getItem('userData')));
 
     const handleLogout = () => {
         clearToken();
+        sessionStorage.removeItem('userData');
+        setToken('');
+        setUserData(null);
         navigate('/login');
     };
 
-    const reduxData = useSelector(setUserData);
-    const userData = reduxData?.payload?.user?.userData || null;
+    useEffect(() => {
+        const resultToken = getToken();
+        setToken(resultToken);
 
-    const token = getToken();
-    const dataToken = token ? getRoleFromToken(token) : null;
-    const role = dataToken?.role || null;
+        if (resultToken) {
+            const dataToken = getRoleFromToken(resultToken);
+            setRole(dataToken?.role);
+        }
+
+        const handleStorageChange = () => {
+            setUserData(JSON.parse(sessionStorage.getItem('userData')));
+            setToken(getToken());
+        };
+
+        window.addEventListener('storage', handleStorageChange);
+
+        return () => {
+            window.removeEventListener('storage', handleStorageChange);
+        };
+
+    }, [token]);
 
     const navItems = [
         { text: "INICIO", to: '/' },
