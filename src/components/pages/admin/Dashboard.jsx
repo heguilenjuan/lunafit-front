@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchProducts, deleteProduct, updateProduct } from '../../../redux/productsSlice';
@@ -14,27 +15,23 @@ const Dashboard = () => {
   const products = useSelector((state) => state.products.items);
   const productStatus = useSelector((state) => state.products.status);
   const error = useSelector((state) => state.products.error);
+  const totalPages = useSelector((state) => state.products.totalPages);
+  const currentPage = useSelector((state) => state.products.currentPage);
+
   const [showConfirm, setShowConfirm] = useState(false);
   const [productToDelete, setProductToDelete] = useState(null);
   const [editingProduct, setEditingProduct] = useState(null);
-  const [editedProduct, setEditedProduct] = useState({
-    name: '',
-    price: '',
-    description: '',
-    size: '',
-    category: '',
-    offer: '',
-    stock: '',
-    image: '',
-    imageOne: '',
-    imageTwo: ''
+  const [editedProduct, setEditedProduct] = useState({});
+
+  const [page, setPage] = useState(currentPage);
+  const [filters, setFilters] = useState({
+    category: [],
+    size: []
   });
 
   useEffect(() => {
-    if (productStatus === 'idle') {
-      dispatch(fetchProducts());
-    }
-  }, [productStatus, dispatch]);
+    dispatch(fetchProducts({ page, filters }));
+  }, [dispatch, page, filters]);
 
   const handleDelete = (productId) => {
     setProductToDelete(productId);
@@ -63,13 +60,13 @@ const Dashboard = () => {
   const handleEdit = (product) => {
     setEditingProduct(product._id);
     setEditedProduct({
+      id: product._id,
       name: product.name,
       price: product.price,
       description: product.description || '',
-      size: product.size.join(',') || '',
       category: product.category || '',
-      offer: product.offer || '',
-      stock: product.stock || '',
+      offer: product.offer || false,
+      sizes: product.sizes || [],
       image: product.image || '',
       imageOne: product.imageOne || '',
       imageTwo: product.imageTwo || ''
@@ -78,25 +75,33 @@ const Dashboard = () => {
 
   const handleEditChange = (e) => {
     const { name, value } = e.target;
-    setEditedProduct({ ...editedProduct, [name]: value });
+    if (name === 'sizes') {
+      const sizesArray = value.split('\n').map(line => {
+        const [size, stock] = line.split(',').map(part => part.trim());
+        return { size, stock: Number(stock) || 0 };
+      });
+      setEditedProduct({ ...editedProduct, sizes: sizesArray });
+    } else {
+      setEditedProduct({ ...editedProduct, [name]: value });
+    }
   };
 
-  const handleEditSubmit = (productId) => {
-    const updatedProduct = {
-      ...editedProduct,
-      size: editedProduct.size.split(',').map(s => s.trim())
-    };
-
-    dispatch(updateProduct({ id: productId, ...updatedProduct }))
+  const handleEditSubmit = () => {
+    dispatch(updateProduct(editedProduct))
       .unwrap()
       .then(() => {
         setEditingProduct(null);
-        dispatch(fetchProducts()); // Refresca la lista de productos
-        // handleDelete(id) // Esta línea parece incorrecta, puede ser removida
+        dispatch(fetchProducts({ page, filters }));
       })
       .catch((error) => {
-        console.error('Error updating product:', error.message); // Imprime el mensaje de error
+        console.error('Error updating product:', error.message);
       });
+  };
+
+  const handlePageChange = (newPage) => {
+    if (newPage >= 1 && newPage <= totalPages) {
+      setPage(newPage);
+    }
   };
 
   return (
@@ -111,37 +116,32 @@ const Dashboard = () => {
                 <img src={product.image} alt={product.name} className="product-image" />
                 <div className="product-info">
                   <h5 className="product-name">{product.name}</h5>
-                  <p className="product-price">Precio: <b>${product.price}</b></p>
-                  <p className="product-stock">Stock: <b>{product.stock}</b></p>
-                  <p>Descuento: <b>{product.offer}</b></p>
+                  <p className="product-price">Price: <b>${product.price}</b></p>
+                  <p className="product-stock">Stock: <b>{product.sizes.reduce((acc, size) => acc + size.stock, 0)}</b></p>
+                  <p>Discount: <b>{product.offer ? 'Yes' : 'No'}</b></p>
                   <div className='product-size'>
-                    <p>Talles:</p>
+                    <p>Sizes:</p>
                     <div className='sizes'>
-                      {product.size.map((item, index) => (
-                        <span key={index}><b>{item}</b></span>
+                      {product.sizes.map((sizeObj, index) => (
+                        <div key={index}>
+                          <span><b>{sizeObj.size}</b>: {sizeObj.stock}</span>
+                        </div>
                       ))}
                     </div>
                   </div>
                 </div>
                 <div className="product-actions">
-                  <button
-                    onClick={() => handleEdit(product)}
-                    className="btn"
-                  >
+                  <button onClick={() => handleEdit(product)} className="btn">
                     <img src={EditIcon} alt="Edit" className="icon" />
                   </button>
-                  <button
-                    onClick={() => handleDelete(product._id)}
-                    className="btn"
-                  >
+                  <button onClick={() => handleDelete(product._id)} className="btn">
                     <img src={DeleteIcon} alt="Delete" className="icon" />
                   </button>
                 </div>
               </div>
               {editingProduct === product._id && (
                 <EditComponent
-                  producto={product}
-                  editedProducto={editedProduct}
+                  producto={editedProduct}
                   handleEditChange={handleEditChange}
                   handleEditSubmit={handleEditSubmit}
                   setEditingProduct={setEditingProduct}
@@ -149,6 +149,11 @@ const Dashboard = () => {
               )}
             </div>
           ))}
+          <div className="pagination">
+            <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Previous</button>
+            <span>Page {page} of {totalPages}</span>
+            <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>Next</button>
+          </div>
         </div>
       )}
       {productStatus === 'failed' && <div>{error}</div>}

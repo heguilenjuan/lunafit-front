@@ -2,10 +2,25 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit';
 import { fetchData } from '../utils/api';
 import { getToken } from '../utils/auth';
 
-export const fetchProducts = createAsyncThunk('products/fetchProducts', async () => {
-    const response = await fetchData('api/product', { method: 'GET' });
-    return response;
-});
+// FETCHING PRODUCT FILTRO Y PAGINACION
+export const fetchProducts = createAsyncThunk(
+    'products/fetchProducts',
+    async ({ page = 1, limit = 8, filters = {} }) => {
+        const { size, category } = filters;
+        let query = `api/product?page=${page}&limit=${limit}`;
+
+        if (category.length > 0) {
+            query += `&category=${category.join(',')}`;
+        }
+
+        if (size.length > 0) {
+            query += `&size=${size.join(',')}`;
+        }
+
+        const response = await fetchData(query, { method: 'GET' });
+        return response;
+    }
+);
 
 // Fetch a product by ID
 export const fetchProductById = createAsyncThunk('products/fetchProductById', async (id) => {
@@ -14,6 +29,7 @@ export const fetchProductById = createAsyncThunk('products/fetchProductById', as
 });
 
 
+// Delete a product
 export const deleteProduct = createAsyncThunk('products/deleteProduct', async (productId) => {
     const token = getToken();
     const result = await fetchData(`api/product/${productId}`, {
@@ -23,6 +39,8 @@ export const deleteProduct = createAsyncThunk('products/deleteProduct', async (p
     return result;
 });
 
+
+// Update a product
 export const updateProduct = createAsyncThunk(
     'products/updateProduct',
     async ({ id, ...updatedProduct }) => {
@@ -35,6 +53,7 @@ export const updateProduct = createAsyncThunk(
                 formData.append(key, updatedProduct[key]);
             }
         }
+        console.log(id, updatedProduct);
 
         const response = await fetchData(`api/product/${id}`, {
             method: 'PUT',
@@ -57,7 +76,8 @@ const productsSlice = createSlice({
         items: [],
         status: 'idle',
         error: null,
-        selectedProduct: null,
+        totalPages: 0,
+        currentPage: 1,
     },
     reducers: {
         selectProduct: (state, action) => {
@@ -71,7 +91,9 @@ const productsSlice = createSlice({
             })
             .addCase(fetchProducts.fulfilled, (state, action) => {
                 state.status = 'succeeded';
-                state.items = action.payload;
+                state.items = action.payload.products; // Aquí se asignan los productos
+                state.totalPages = action.payload.totalPages; // Aquí se asigna el total de páginas
+                state.currentPage = action.payload.currentPage; // Aquí se asigna la página actual
             })
             .addCase(fetchProducts.rejected, (state, action) => {
                 state.status = 'failed';
@@ -88,8 +110,7 @@ const productsSlice = createSlice({
                 if (index !== -1) {
                     state.items[index] = action.payload;
                 }
-            })
-        // No se maneja el estado de actualización aquí, se manejará en el componente
+            });
     },
 });
 

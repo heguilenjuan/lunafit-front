@@ -1,0 +1,64 @@
+.knowUsContainer {
+    padding: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+}
+
+.knowUsContainer h2 {
+    font-size: 2rem;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+.knowUsContainer p {
+    font-size: 1rem;
+    margin-bottom: 20px;
+    color: #555;
+    text-align: justify;
+}
+
+.aboutUs, .whatWeOffer, .whereWeAre {
+    margin-bottom: 40px;
+}
+
+.aboutUs h2, .whatWeOffer h2, .whereWeAre h2 {
+    border-bottom: 2px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+/* Media Queries para pantallas más pequeñas */
+@media (max-width: 768px) {
+    .knowUsContainer {
+        padding: 15px;
+    }
+
+    .knowUsContainer h2 {
+        font-size: 1.8rem;
+    }
+
+    .knowUsContainer p {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .knowUsContainer {
+        padding: 10px;
+    }
+
+    .knowUsContainer h2 {
+        font-size: 1.5rem;
+    }
+
+    .knowUsContainer p {
+        font-size: 0.9rem;
+    }
+
+    .aboutUs, .whatWeOffer, .whereWeAre {
+        margin-bottom: 30px;
+    }
+}

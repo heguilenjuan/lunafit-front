@@ -2,72 +2,93 @@
 .navContainer {
     display: flex;
     align-items: center;
+    justify-content: space-between;
+    padding: 0 5rem;
     width: 100%;
+
+}
+
+.divCarrousel {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
     height: fit-content;
-    padding-block: 1rem;
-}
-
-.navList {
-    display: flex;
-    flex-direction: row;
+    font-weight: 500;
     width: 100%;
-    justify-content: space-evenly;
-    list-style: none; /* Remover estilo de lista */
-    padding: 0; /* Remover padding */
-    margin: 0; /* Remover margen */
 }
 
-.navItems {
+.navbar-content {
     display: flex;
-    flex-direction: row;
-    align-items: center; /* Alinear verticalmente */
-    text-decoration: none; /* Remover subrayado en links */
+    align-items: center;
+    gap: 1rem;
+    /* Añadir espacio entre elementos */
 }
 
-p {
+.box-cart {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo {
+    width: 8rem;
+    height: 8rem;
+}
+
+.navbar-toggler {
+    margin-left: auto;
+}
+
+.offcanvas-header h5 {
     margin: 0;
-    padding-left: 0.5rem; /* Agregar espacio entre icono y texto */
-    color: inherit; /* Heredar color del link */
 }
 
-li {
-    cursor: pointer;
-    list-style: none; /* Remover estilo de lista */
+.offcanvas-body .nav-link {
+    padding: 0.5rem 1rem;
+}
+.offcanvas.show {
+    opacity: 1; /* Asegúrate de que no haya opacidad cuando el menú está visible */
 }
 
-li:hover {
-    transition: 0.5s;
-    opacity: 50%;
+.offcanvas {
+    opacity: 1; /* Asegúrate de que no haya opacidad cuando el menú está cerrado */
+    transition: opacity 0.3s ease; /* Transición para suavizar el efecto de visibilidad */
 }
 
 /* Responsive Styles */
 @media (max-width: 768px) {
-    .navList {
-        flex-direction: column;
-        align-items: center;
+    .navContainer{
+        padding:0 1rem;
+    }
+    .box-cart span {
+        display: none;
     }
 
-    .navItems {
-        padding: 0.5rem 0; /* Agregar padding vertical para separación entre elementos */
+    .logo {
+        width: 6.5rem;
+        height: 6.5rem;
     }
 }
 
 @media (max-width: 480px) {
-    .navList{
-        margin: 0 auto;
-        width: 45%;
-        align-items: flex-start;
-    }
-    .navItems{
-        padding: 1rem 0.5rem;
-    }
-    .navContainer{
-        padding: 0;
-        width: fit-content;
-        
-    }
-    p {
-        font-size: 0.9rem; /* Reducir tamaño de texto */
+
+
+    .box-cart {
+        align-items: center;
+        gap: 0.5rem;
+        /* Reducir espacio entre elementos */
     }
 
+    .box-cart span {
+        display: none;
+    }
+
+    .logo {
+        width: 6.5rem;
+        height: 6.5rem;
+    }
+
+    .navbar-toggler {
+        margin-left: 0;
+    }
 }

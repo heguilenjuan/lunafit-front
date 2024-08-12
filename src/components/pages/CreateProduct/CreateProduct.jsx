@@ -8,28 +8,36 @@ import NavAdmin from '../admin/NavAdmin';
 const CreateProduct = () => {
     const [loading, setLoading] = useState(false);
     const [serverError, setServerError] = useState('');
-    const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { register, handleSubmit, formState: { errors }, reset, watch } = useForm();
 
-    // Obtén el token de autenticación del almacenamiento local
-    const token = localStorage.getItem('token'); // Cambia esto según cómo manejes la autenticación
+    const token = localStorage.getItem('token');
+
+    const sizes = watch('sizes', []); // Watch sizes field to ensure it's updated
+    const stocks = watch('stocks', []); // Watch stocks field to ensure it's updated
 
     const onSubmit = async (data) => {
         setLoading(true);
         setServerError('');
+
         const formData = new FormData();
         formData.append('name', data.name);
         formData.append('price', data.price);
         formData.append('category', data.category);
-        formData.append('stock', data.stock);
-        formData.append('offer', data.offer);
-        formData.append('description', data.description);
-        formData.append('color', data.color);
-        // Convertir los tamaños seleccionados en un array y agregarlos al formData uno por uno
-        const sizes = Array.from(data.size); // Convertir a array
-        sizes.forEach(size => formData.append('size[]', size)); // Usar 'size[]' para enviar como array
-        formData.append('image', data.image[0]); // Assuming 'image' field is a single file
-        formData.append('imageOne', data.image1[0]); // Assuming 'image1' field is a single file
-        formData.append('imageTwo', data.image2[0]); // Assuming 'image2' field is a single file
+        formData.append('offer', data.offer || 0); // Default to 0 if not provided
+        formData.append('description', data.description || ''); // Default to empty string if not provided
+
+        // Convert sizes and stocks to the required format
+        const sizesAndStock = sizes.map((size, index) => ({
+            size: size,
+            stock: stocks[index] || 0 // Default to 0 if stock is not provided
+        }));
+
+        // Add sizes as a single JSON string
+        formData.append('sizes', JSON.stringify(sizesAndStock));
+
+        if (data.image.length > 0) formData.append('image', data.image[0]);
+        if (data.image1.length > 0) formData.append('imageOne', data.image1[0]);
+        if (data.image2.length > 0) formData.append('imageTwo', data.image2[0]);
 
         try {
             await fetchData('api/product', {
@@ -52,8 +60,7 @@ const CreateProduct = () => {
 
     return (
         <>
-            {loading ? <Spinner />
-                :
+            {loading ? <Spinner /> :
                 <div>
                     <NavAdmin />
                     <div className='containerForm'>
@@ -86,36 +93,40 @@ const CreateProduct = () => {
                             </div>
                             {errors.category && <p className='error'>{errors.category.message}</p>}
 
-                            <input
-                                placeholder='Stock'
-                                type="number"
-                                {...register('stock', { min: 0 })}
-                                className='input'
-                            />
-                            {errors.stock && <p className='error'>{errors.stock.message}</p>}
+                            <div className='size-stock-container'>
+                                <label>Sizes and Stock</label>
+                                {['S', 'M', 'L', 'XL', '1/2', '3/4'].map((size, index) => (
+                                    <div key={size} className='size-stock-row'>
+                                        <label>{size}</label>
+                                        <input
+                                            type="hidden"
+                                            value={size}
+                                            {...register(`sizes[${index}]`)}
+                                        />
+                                        <input
+                                            placeholder={`Stock for ${size}`}
+                                            type="number"
+                                            {...register(`stocks[${index}]`, { min: 0 })}
+                                            className='input'
+                                        />
+                                    </div>
+                                ))}
+                            </div>
 
                             <input
-                                placeholder='Offer'
-                                type="number"
-                                {...register('offer', { min: 0 })}
-                                className='input'
-                            />
-                            {errors.offer && <p className='error'>{errors.offer.message}</p>}
-
-                            <textarea
                                 placeholder='Description'
                                 {...register('description')}
                                 className='input'
                             />
-                            <div className='size-container'>
-                                <label>Size (select multiple)</label>
-                                <select {...register('size')} multiple className='input'>
-                                    <option value="S">S</option>
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                </select>
-                            </div>
+                            {errors.description && <p className='error'>{errors.description.message}</p>}
+
+                            <input
+                                placeholder='Offer'
+                                {...register('offer')}
+                                type="number"
+                                className='input'
+                            />
+                            {errors.offer && <p className='error'>{errors.offer.message}</p>}
 
                             <input
                                 type="file"

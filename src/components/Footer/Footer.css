@@ -1,14 +1,20 @@
 .boxFooter {
-    height: 40vh;
     background-color: #fff;
     border-radius: 15px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    height: auto;
+}
+
+.boxNavigate{
+    display: flex;
+    flex-direction: column;
+    gap: 0.1rem;
 }
 
 .networksFooter {
-    width: auto;
+    width: 100%;
     display: flex;
     flex-direction: row;
     justify-content: space-around;
@@ -19,14 +25,15 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
-
+    justify-content: space-between;
+    height: fit-content;
 }
 
 .listContactFooter {
     padding: 0;
     margin: 0;
     width: 100%;
+
 
 }
 
@@ -48,8 +55,7 @@
 
 .infoFooter {
     background-color: black;
-    height: 3rem;
-
+    height: auto;
     color: white;
     display: flex;
     flex-direction: row;
@@ -58,21 +64,42 @@
     padding: 0 5rem;
 }
 
-
-@media screen and (max-width: 480px) {
-   .infoFooter{
-    width: 100%;
+.boxContact {
     display: flex;
     flex-direction: column;
-    height: auto;
-    padding: 0.5rem;
-   }
-
-   .textFooter{
-    font-size: 0.7rem;
-    padding: 0;
-    border-top: 1px solid white;
-    padding-block: 0.3rem;
-   }
+    gap: 0.4rem;
 }
 
+
+
+@media screen and (max-width: 480px) {
+    .infoFooter {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        padding: 0.5rem;
+    }
+
+    .networksFooter {
+        display: flex;
+        flex-direction: column;
+        padding: 1rem 2rem;
+        gap: 0.5rem;
+    }
+
+    .boxContactFooter {
+        align-items: flex-start;
+    }
+
+    .boxPayFooter {
+        align-items: flex-start;
+    }
+
+    .textFooter {
+        font-size: 0.7rem;
+        padding: 0;
+        border-top: 1px solid white;
+        padding-block: 0.3rem;
+    }
+}

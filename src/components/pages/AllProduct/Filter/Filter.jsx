@@ -1,8 +1,9 @@
-import { useEffect, useState } from "react";
-import './Filter.css'
 /* eslint-disable react/prop-types */
+// Filter.js
+import { useEffect, useState } from "react";
+import './Filter.css';
 
-const Filter = ({setFilters }) => {
+const Filter = ({ filters, setFilters }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);
 
     useEffect(() => {
@@ -19,13 +20,11 @@ const Filter = ({setFilters }) => {
 
         setFilters((prev) => {
             if (name === 'size') {
-                // Manejo de los filtros de tamaño
                 const sizes = checked 
                     ? [...prev.size, value] 
                     : prev.size.filter((item) => item !== value);
                 return { ...prev, size: sizes };
             } else {
-                // Manejo de los filtros de categoría
                 const categories = checked 
                     ? [...prev.category, value] 
                     : prev.category.filter((item) => item !== value);
@@ -33,6 +32,8 @@ const Filter = ({setFilters }) => {
             }
         });
     };
+
+    console.log(filters)
 
     const filterContent = (
         <div className="filter-content">
@@ -44,6 +45,7 @@ const Filter = ({setFilters }) => {
                         name="category"
                         value="calzas largas"
                         onChange={handleCheckboxChange}
+                        checked={filters.category.includes("calzas largas")}
                     />
                     <label>Calzas Largas</label>
                 </div>
@@ -53,6 +55,7 @@ const Filter = ({setFilters }) => {
                         name="category"
                         value="bikers"
                         onChange={handleCheckboxChange}
+                        checked={filters.category.includes("bikers")}
                     />
                     <label>Bikers</label>
                 </div>
@@ -62,8 +65,9 @@ const Filter = ({setFilters }) => {
                         name="category"
                         value="calzas cortas"
                         onChange={handleCheckboxChange}
+                        checked={filters.category.includes("calzas cortas")}
                     />
-                    <label>Calzas cortas</label>
+                    <label>Calzas Cortas</label>
                 </div>
                 <div className="filter-item">
                     <input
@@ -71,6 +75,7 @@ const Filter = ({setFilters }) => {
                         name="category"
                         value="tops"
                         onChange={handleCheckboxChange}
+                        checked={filters.category.includes("tops")}
                     />
                     <label>Tops</label>
                 </div>
@@ -85,8 +90,29 @@ const Filter = ({setFilters }) => {
                         <input
                             type="checkbox"
                             name="size"
+                            value="1/2"
+                            onChange={handleCheckboxChange}
+                            checked={filters.size.includes("1/2")}
+                        />
+                        <label>1/2</label>
+                    </div>
+                    <div className="filter-item">
+                        <input
+                            type="checkbox"
+                            name="size"
+                            value="3/4"
+                            onChange={handleCheckboxChange}
+                            checked={filters.size.includes("3/4")}
+                        />
+                        <label>3/4</label>
+                    </div>
+                    <div className="filter-item">
+                        <input
+                            type="checkbox"
+                            name="size"
                             value="S"
                             onChange={handleCheckboxChange}
+                            checked={filters.size.includes("S")}
                         />
                         <label>S</label>
                     </div>
@@ -96,6 +122,7 @@ const Filter = ({setFilters }) => {
                             name="size"
                             value="M"
                             onChange={handleCheckboxChange}
+                            checked={filters.size.includes("M")}
                         />
                         <label>M</label>
                     </div>
@@ -105,6 +132,7 @@ const Filter = ({setFilters }) => {
                             name="size"
                             value="L"
                             onChange={handleCheckboxChange}
+                            checked={filters.size.includes("L")}
                         />
                         <label>L</label>
                     </div>
@@ -114,6 +142,7 @@ const Filter = ({setFilters }) => {
                             name="size"
                             value="XL"
                             onChange={handleCheckboxChange}
+                            checked={filters.size.includes("XL")}
                         />
                         <label>XL</label>
                     </div>
