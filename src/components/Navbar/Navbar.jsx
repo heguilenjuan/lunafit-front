@@ -10,14 +10,6 @@ import { setUserData } from '../../redux/userSlice';
 const Navbar = () => {
     const navigate = useNavigate();
 
-    const handleMouseEnter = (index) => {
-        setHoveredItem(index);
-    };
-
-    const handleMouseLeave = () => {
-        setHoveredItem(null);
-    };
-
     const handleLogout = () => {
         clearToken();
         navigate('/login');
@@ -113,8 +105,6 @@ const Navbar = () => {
                                                 e.preventDefault();
                                                 handleNavLinkClick(item.to, item.onClick);
                                             }}
-                                            onMouseEnter={() => handleMouseEnter(index)}
-                                            onMouseLeave={() => handleMouseLeave()}
                                         >
                                             {item.text}
                                         </Link>

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import Spinner from "../../Spinner/Spinner";
@@ -39,7 +40,7 @@ const Cart = () => {
         fetchCartData();
     }, [cartId, token, refresh]); // Dependencia en `refresh` para actualizar
 
-    const handleRemoveItem = async (itemId) => {
+    const handleRemoveItem = async (itemId, size) => {
         try {
             const result = await fetchData('api/cart', {
                 method: 'DELETE',
@@ -47,7 +48,7 @@ const Cart = () => {
                     'Authorization': `Bearer ${token}`,
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ productId: itemId })
+                body: JSON.stringify({ itemId, size })
             });
             if (result) {
                 console.log('Item Eliminado');
@@ -101,6 +102,10 @@ const Cart = () => {
         console.log('completando orden');
     }
 
+    const checkItemExists = (item) => {
+        return product.items.some(cartItem => cartItem.productId._id === item.productId._id && cartItem.size === item.size);
+    };
+
     if (loading) {
         return <Spinner />;
     }
@@ -109,14 +114,16 @@ const Cart = () => {
         <div className="cart-container">
             <h3 className="cart-title">Carrito de compras</h3>
             {product && product.items.length === 0 ? (
-                <p className="empty-cart-message">Tu carrito esta vacio</p>
+                <p className="empty-cart-message">Tu carrito está vacío</p>
             ) : (
                 <>
                     <ul className="cart-list">
                         {product.items.map(item => (
-                            <li key={item.productId._id} className="cart-item">
+                            <li key={item._id} className="cart-item">
                                 <div className="item-details">
                                     <h2 className="item-name">{item.productId.name}</h2>
+                                    <p className="item-size">Talle: {item.size}</p>
+                                    <p className="item-stock">Stock disponible: {item.productId.sizes.find(sizeObj => sizeObj.size === item.size)?.stock || 'No disponible'}</p>
                                     {editingItemId === item._id ? (
                                         <div className="box-quantity">
                                             <input
@@ -154,8 +161,8 @@ const Cart = () => {
                                     )}
                                 </div>
                                 <button
-                                    className="remove-item-button btn "
-                                    onClick={() => handleRemoveItem(item._id)}
+                                    className="remove-item-button btn"
+                                    onClick={() => handleRemoveItem(item._id, item.size)}
                                 >
                                     <img src={Trash} alt="Trash icon" width={20} height={20} />
                                 </button>

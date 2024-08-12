@@ -1,22 +1,32 @@
+/* eslint-disable no-unused-vars */
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductById } from '../../../redux/productsSlice';
+import { addToCart } from '../../../redux/cartSlice';
 import './ProductDetail.css';
 import Whatsapp from '../../../assets/icons/whatsapp.svg';
 import Spinner from '../../Spinner/Spinner';
 
+import Swal from 'sweetalert2';
+import { getToken } from '../../../utils/auth';
+import NavDetail from './Nav/NavDetail';
+
 const ProductDetail = () => {
     const { id } = useParams();
+    //redux
     const dispatch = useDispatch();
     const products = useSelector((state) => state.products.items);
     const loading = useSelector((state) => state.products.loading);
     const error = useSelector((state) => state.products.error);
+
+    //estados
     const [product, setProduct] = useState(null);
     const [selectedImage, setSelectedImage] = useState(null);
     const [selectedSize, setSelectedSize] = useState(null);
     const [selectedStock, setSelectedStock] = useState(null);
 
+    //llama al producto por el id
     useEffect(() => {
         const fetchedProduct = products.find(product => product._id === id);
         if (fetchedProduct) {
@@ -32,19 +42,58 @@ const ProductDetail = () => {
         }
     }, [id, products, dispatch]);
 
+    //setea las imagenes para el cambio 
     const handleImageClick = (imageUrl) => {
         setSelectedImage(imageUrl);
     };
 
+    //setea el size selecionado
     const handleSizeClick = (size) => {
         setSelectedSize(size);
         const sizeDetails = product?.sizes.find(sizeAndStock => sizeAndStock.size === size);
         setSelectedStock(sizeDetails?.stock || 0);
     };
 
+    //mensaje determinado para enviar al whatsap
     const phoneNumber = '+542914429530';
     const message = `Hola, estoy interesada en el producto *${product?.name}*, quería coordinar para probármelo!.`;
     const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+
+    // función para agregar al carrito
+    const handleAddToCart = async () => {
+        if (!selectedSize) {
+            alert('Por favor, selecciona un talle antes de añadir al carrito.');
+            return;
+        }
+        const token = getToken();
+        console.log(token);
+        if (token) {
+            const resultAction = await dispatch(addToCart({
+                productId: product._id,
+                size: selectedSize,
+                quantity: 1,
+            })).unwrap();
+
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'success',
+                text: 'Agregado al carrito',
+                showConfirmButton: false,
+                timer: 1500,
+                toast: true,
+            });
+
+        } else {
+            Swal.fire({
+                position: 'bottom-end',
+                icon: 'error',
+                text: 'Debes iniciar sesión primero',
+                showConfirmButton: false,
+                timer: 2000,
+                toast: true,
+            });
+        }
+    };
 
     if (loading) {
         return <Spinner />;
@@ -63,12 +112,15 @@ const ProductDetail = () => {
         newPrice = Math.round(newPrice);
         return newPrice;
     };
-
     return (
         <main className="expandCard">
             <div className='containerCard'>
                 <div className='boxImageCard'>
-                    <span className='ruteCard'>Detalle del producto</span>
+                    <div className='ruteCard'>
+                        <NavDetail />
+                        <span className='ruteCard'>Detalle del producto</span>
+                    </div>
+
                     <div className='boxImage'>
                         <div className='thumbnails'>
                             {product?.image && (
@@ -138,12 +190,17 @@ const ProductDetail = () => {
                             </div>
                         )}
                     </div>
-                    <a href={url} target="_blank" rel="noopener noreferrer">
-                        <button className='btnConsult'>
-                            <img src={Whatsapp} alt="iconWhatsapp" width={20} height={20} className='iconFill' />
-                            Consultanos
+                    <div className='actions'>
+                        <a href={url} target="_blank" rel="noopener noreferrer">
+                            <button className='btnConsult'>
+                                <img src={Whatsapp} alt="iconWhatsapp" width={20} height={20} className='iconFill' />
+                                Consultanos
+                            </button>
+                        </a>
+                        <button className='btnAddToCart' onClick={handleAddToCart} >
+                            Añadir al carrito
                         </button>
-                    </a>
+                    </div>
                 </div>
             </div>
         </main>
