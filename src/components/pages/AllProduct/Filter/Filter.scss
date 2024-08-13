@@ -1,6 +1,7 @@
 .filter-content {
     display: grid;
     grid-template-columns: 1fr;
+    margin-block: 1rem;
     gap: 1rem;
   
     @media (max-width: 480px) {

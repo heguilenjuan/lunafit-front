@@ -1,3 +1,5 @@
+@use '../../../Sass/variables.scss' as *;
+
 .expandCard {
     display: flex;
     justify-content: center;
@@ -39,7 +41,7 @@
     align-self: flex-start;
     margin-bottom: 10px;
     font-size: 14px;
-    color: #999;
+    color: grey;
   }
   
   .boxImage {
@@ -62,7 +64,7 @@
     border: 2px solid transparent;
   
     &:hover {
-      border-color: #000;
+      border-color: $color-black;
     }
   }
   
@@ -87,21 +89,21 @@
   }
   
   .textInfo {
-    font-size: 24px;
+    font-size: 1.5rem;
     margin-bottom: 10px;
   }
   
   .priceInfo {
-    font-size: 20px;
+    font-size: 1.1rem;
     font-weight: 500;
-    color: #000;
+    color: $color-black;
   }
   
   .oldPrice {
     font-size: 16px;
     font-weight: bold;
     text-decoration: line-through;
-    color: #888;
+    color: grey;
     margin-right: 10px;
   }
   
@@ -114,7 +116,7 @@
   .newPriceText {
     font-size: 24px;
     font-weight: 700;
-    color: #35db35;
+    color: $color-green-mark;
   }
   
   .porcent {
@@ -153,12 +155,12 @@
       transition: background-color 0.3s, color 0.3s;
   
       &:hover {
-        background-color: #d0d0d0;
+        background-color: grey;
       }
   
       &.active {
-        background-color: #000;
-        color: #fff;
+        background-color: $color-black;
+        color: $color-white;
       }
     }
   }
@@ -170,17 +172,17 @@
   }
   
   .textStock {
-    font-size: 16px;
+    font-size: 1rem;
   }
   
   .stockNumber {
-    font-size: 16px;
-    color: #00ff00;
+    font-size: 1rem;
+    color: $color-green-mark;
   }
   
   .description {
     margin-top: 20px;
-    font-size: 16px;
+    font-size: 1rem;
     line-height: 1.5;
     color: #333;
   }
@@ -191,16 +193,19 @@
     justify-content: center;
     margin: 0 auto;
     padding: 10px 20px;
-    background-color: #25D366;
-    color: #fff;
+    background-color: $color-green-mark;
+    color: $color-white;
     border: none;
     border-radius: 4px;
     cursor: pointer;
     width: 100%;
-  
+    &:hover{
+      background-color: $color-green-btn;
+    }
     img {
       margin-right: 10px;
     }
+
   }
   
   .actions {
@@ -214,8 +219,8 @@
   }
   
   .btnAddToCart {
-    background-color: #007bff;
-    color: white;
+    background-color: $color-black;
+    color: $color-white;
     border: none;
     padding: 10px 20px;
     border-radius: 5px;
@@ -226,7 +231,7 @@
     gap: 5px;
   
     &:hover {
-      background-color: #0056b3;
+      background-color: $color-green-btn;
     }
   
     @media (max-width: 480px) {

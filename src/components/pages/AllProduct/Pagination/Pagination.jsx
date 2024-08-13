@@ -1,5 +1,8 @@
 /* eslint-disable react/prop-types */
 // Pagination.js
+
+import './Pagination.scss';
+
 const Pagination = ({ totalPages, currentPage = 1, onPageChange }) => {
   
     // Asegúrate de que currentPage esté dentro del rango válido

@@ -33,118 +33,126 @@ const Filter = ({ filters, setFilters }) => {
         });
     };
 
-    console.log(filters)
-
     const filterContent = (
         <div className="filter-content">
             <div className="filter-section">
-                <h3>Categorías</h3>
+                <h4>Categorías</h4>
                 <div className="filter-item">
                     <input
+                        className="form-check-input"
                         type="checkbox"
                         name="category"
                         value="calzas largas"
                         onChange={handleCheckboxChange}
                         checked={filters.category.includes("calzas largas")}
                     />
-                    <label>Calzas Largas</label>
+                    <label className="form-check-label">Calzas Largas</label>
                 </div>
                 <div className="filter-item">
                     <input
+                        className="form-check-input"
                         type="checkbox"
                         name="category"
                         value="bikers"
                         onChange={handleCheckboxChange}
                         checked={filters.category.includes("bikers")}
                     />
-                    <label>Bikers</label>
+                    <label className="form-check-label">Bikers</label>
                 </div>
                 <div className="filter-item">
                     <input
+                        className="form-check-input"
                         type="checkbox"
                         name="category"
                         value="calzas cortas"
                         onChange={handleCheckboxChange}
                         checked={filters.category.includes("calzas cortas")}
                     />
-                    <label>Calzas Cortas</label>
+                    <label className="form-check-label">Calzas Cortas</label>
                 </div>
                 <div className="filter-item">
                     <input
+                        className="form-check-input"
                         type="checkbox"
                         name="category"
                         value="tops"
                         onChange={handleCheckboxChange}
                         checked={filters.category.includes("tops")}
                     />
-                    <label>Tops</label>
+                    <label className="form-check-label">Tops</label>
                 </div>
             </div>
 
             <div className="filter-section">
-                <h3>Filtros</h3>
+                <h4>Filtros</h4>
 
                 <div className="filter-subsection">
-                    <label>Talle</label>
+                    <h5>Talle</h5>
                     <div className="filter-item">
                         <input
-                            type="checkbox"
+                        className="form-check-input"
+                        type="checkbox"
                             name="size"
                             value="1/2"
                             onChange={handleCheckboxChange}
                             checked={filters.size.includes("1/2")}
                         />
-                        <label>1/2</label>
+                        <label className="form-check-label">1/2</label>
                     </div>
                     <div className="filter-item">
                         <input
-                            type="checkbox"
+                        className="form-check-input"
+                        type="checkbox"
                             name="size"
                             value="3/4"
                             onChange={handleCheckboxChange}
                             checked={filters.size.includes("3/4")}
                         />
-                        <label>3/4</label>
+                        <label className="form-check-label">3/4</label>
                     </div>
                     <div className="filter-item">
                         <input
-                            type="checkbox"
+                        className="form-check-input"
+                        type="checkbox"
                             name="size"
                             value="S"
                             onChange={handleCheckboxChange}
                             checked={filters.size.includes("S")}
                         />
-                        <label>S</label>
+                        <label className="form-check-label">S</label>
                     </div>
                     <div className="filter-item">
                         <input
-                            type="checkbox"
+                        className="form-check-input"
+                        type="checkbox"
                             name="size"
                             value="M"
                             onChange={handleCheckboxChange}
                             checked={filters.size.includes("M")}
                         />
-                        <label>M</label>
+                        <label className="form-check-label">M</label>
                     </div>
                     <div className="filter-item">
                         <input
-                            type="checkbox"
+                        className="form-check-input"
+                        type="checkbox"
                             name="size"
                             value="L"
                             onChange={handleCheckboxChange}
                             checked={filters.size.includes("L")}
                         />
-                        <label>L</label>
+                        <label className="form-check-label">L</label>
                     </div>
                     <div className="filter-item">
                         <input
-                            type="checkbox"
+                        className="form-check-input"
+                        type="checkbox"
                             name="size"
                             value="XL"
                             onChange={handleCheckboxChange}
                             checked={filters.size.includes("XL")}
                         />
-                        <label>XL</label>
+                        <label className="form-check-label">XL</label>
                     </div>
                 </div>
             </div>

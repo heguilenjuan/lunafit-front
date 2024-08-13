@@ -1,0 +1,13 @@
+@use '../../../../Sass/variables.scss' as *;
+
+.page-item{
+    
+    .page-link{
+        color:$color-black;
+    }
+}
+.active .page-link{
+    background-color: $color-black;
+    color:$color-white;
+    border: 1px solid $color-green-link;
+}

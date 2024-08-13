@@ -1,3 +1,6 @@
+@use '../../../../Sass/variables.scss' as *;
+
+
 // Register.scss
 .mainRegister {
     display: flex;
@@ -7,7 +10,7 @@
     padding: 2rem;
     width: 100%;
     max-width: 60%;
-    background-color: #ffffff;
+    background-color: $color-white;
     margin: 0 auto;
     border-radius: 8px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -23,7 +26,7 @@
 
 .formTitle {
     margin-bottom: 1rem;
-    color: #333;
+    color: $color-black;
     font-size: 1.5rem;
     text-align: center;
 }
@@ -36,7 +39,7 @@
     transition: border-color 0.3s ease;
 
     &:focus {
-        border-color: #25D366;
+        border-color: $color-green-btn;
         outline: none;
     }
 }
@@ -44,15 +47,15 @@
 .btnRegister {
     padding: 0.75rem;
     font-size: 1rem;
-    background-color: black;
-    color: white;
+    background-color: $color-black;
+    color:$color-white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.5s ease;
 
     &:hover {
-        background-color: #25D366;
+        background-color:$color-green-btn;
     }
 }
 
@@ -63,7 +66,7 @@
 
 .successMessage {
     background-color: #d4edda;
-    color: #155724;
+    color: $color-green-mark;
     padding: 0.75rem;
     border-radius: 5px;
 }
@@ -71,16 +74,6 @@
 .linkToLogin {
     margin-top: 1rem;
     text-align: center;
-
-    a {
-        color: grey;
-        text-decoration: none;
-        transition: color 0.3s ease;
-
-        &:hover {
-            color: #25D366;
-        }
-    }
 }
 
 // Responsive styles
