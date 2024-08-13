@@ -1,8 +1,12 @@
 /* eslint-disable no-unused-vars */
-import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
+//React redux
+import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, deleteProduct, updateProduct } from '../../../redux/productsSlice';
+//Style
 import './Dashboard.css';
+
+//Components
 import Spinner from '../../Spinner/Spinner';
 import EditIcon from '../../../assets/icons/edit.svg';
 import DeleteIcon from '../../../assets/icons/delete.svg';

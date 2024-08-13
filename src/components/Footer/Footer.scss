@@ -1,0 +1,103 @@
+@use '../../Sass/variables.scss' as *;
+
+.boxFooter {
+    background-color: $color-white;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: auto;
+
+    .networksFooter {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        padding-block: 1rem;
+
+        .boxNavigate {
+            display: flex;
+            flex-direction: column;
+            gap: 0.1rem;
+        }
+
+        .boxContactFooter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-between;
+            height: fit-content;
+
+            .listContactFooter {
+                padding: 0;
+                margin: 0;
+                width: 100%;
+            }
+
+            .itemListFooter {
+                display: flex;
+                flex-direction: row;
+                align-items: center;
+                justify-content: flex-start;
+                padding-block: 0.4rem;
+                gap: 0.3rem;
+
+            }
+        }
+
+        .boxPayFooter {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .boxContact {
+            display: flex;
+            flex-direction: column;
+            gap: 0.4rem;
+        }
+    }
+
+    .infoFooter {
+        background-color: $color-black;
+        height: auto;
+        color: $color-white;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0 5rem;
+
+    }
+
+    @media screen and (max-width: 480px) {
+        .infoFooter {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            height: auto;
+            padding: 0.5rem;
+        }
+
+        .networksFooter {
+            display: flex;
+            flex-direction: column;
+            padding: 1rem 2rem;
+            gap: 0.5rem;
+        }
+
+        .boxContactFooter {
+            align-items: flex-start;
+        }
+
+        .boxPayFooter {
+            align-items: flex-start;
+        }
+
+        .textFooter {
+            font-size: 0.7rem;
+            padding: 0;
+            border-top: 1px solid white;
+            padding-block: 0.3rem;
+        }
+    }
+}

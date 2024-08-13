@@ -1,0 +1,66 @@
+.modal {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .modal-dialog {
+        max-width: 750px;
+        margin: 0 auto;
+        width: 100%;
+
+        /* Ensure it doesn't exceed the screen width */
+        .modal-content {
+            position: relative;
+            padding: 0.3rem;
+            border-radius: 8px;
+            /* Rounded corners */
+            text-align: center;
+
+            .modal-header {
+                display: flex;
+                justify-content: flex-end;
+                border-bottom: none;
+                padding: 0;
+            }
+
+            .modal-body {
+                .img-fluid {
+                    width: 100%;
+                    height: auto;
+                    border-radius: 8px;
+                    /* Rounded corners */
+                }
+            }
+        }
+    }
+
+
+    @media (max-width: 768px) {
+        .modal-dialog {
+            max-width: 90%;
+        }
+
+        .promo-text {
+            font-size: 1rem;
+        }
+
+        .btn-close {
+            font-size: 1.25rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .modal-dialog {
+            max-width: 95%;
+        }
+
+        .promo-text {
+            font-size: 0.875rem;
+        }
+
+        .btn-close {
+            font-size: 1rem;
+        }
+    }
+
+}

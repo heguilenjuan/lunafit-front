@@ -1,0 +1,96 @@
+// Variables
+$padding-desktop: 5rem;
+$padding-mobile: 1rem;
+$logo-size-desktop: 8rem;
+$logo-size-mobile: 6.5rem;
+$gap-desktop: 1rem;
+$gap-mobile: 0.5rem;
+$breakpoint-mobile: 480px;
+$breakpoint-tablet: 768px;
+
+// General Styles
+.navContainer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 $padding-desktop;
+  width: 100%;
+}
+
+.divCarrousel {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  height: fit-content;
+  font-weight: 500;
+  width: 100%;
+}
+
+.navbar-content {
+  display: flex;
+  align-items: center;
+  gap: $gap-desktop; /* Añadir espacio entre elementos */
+}
+
+.box-cart {
+  display: flex;
+  align-items: center;
+  gap: $gap-desktop;
+
+  span {
+    display: none;
+  }
+}
+
+.logo {
+  width: $logo-size-desktop;
+  height: $logo-size-desktop;
+}
+
+.navbar-toggler {
+  margin-left: auto;
+}
+
+.offcanvas-header h5 {
+  margin: 0;
+}
+
+.offcanvas-body .nav-link {
+  padding: 0.5rem 1rem;
+}
+
+.offcanvas {
+  opacity: 1; /* Asegúrate de que no haya opacidad cuando el menú está cerrado */
+  transition: opacity 0.3s ease; /* Transición para suavizar el efecto de visibilidad */
+
+  &.show {
+    opacity: 1; /* Asegúrate de que no haya opacidad cuando el menú está visible */
+  }
+}
+
+// Responsive Styles
+@media (max-width: $breakpoint-tablet) {
+  .navContainer {
+    padding: 0 $padding-mobile;
+  }
+
+  .box-cart span {
+    display: none;
+  }
+
+  .logo {
+    width: $logo-size-mobile;
+    height: $logo-size-mobile;
+  }
+
+  .navbar-toggler {
+    margin-left: 0;
+  }
+}
+
+@media (max-width: $breakpoint-mobile) {
+  .box-cart {
+    align-items: center;
+    gap: $gap-mobile; /* Reducir espacio entre elementos */
+  }
+}

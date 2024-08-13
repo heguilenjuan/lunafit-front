@@ -1,0 +1,32 @@
+.section-carrousel {
+    max-width: 85%;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+
+    .crsl {
+        max-width: 100%;
+    }
+
+    .carousel {
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .slide {
+        margin-inline: 0.2rem;
+    }
+
+    @media (max-width:480px) {
+
+        .section-carrousel {
+            max-width: 100%;
+        }
+
+    }
+
+
+}

@@ -1,14 +1,10 @@
-import './Spinner.css';
-
-import Logo from '../../assets/images/logo.webp';
-
+import './Spinner.scss';
 
 const Spinner = () => {
     return (
-        <div className="spinner-container">
-            <div className="spinner">
-                <img className="logoSpin" src={Logo} alt="Logo" />
-                <p>Cargando...</p>
+        <div className="d-flex justify-content-center">
+            <div className="spinner-border" role="status">
+                <span className="visually-hidden">Cargando...</span>
             </div>
         </div>
     );

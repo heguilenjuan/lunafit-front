@@ -1,10 +1,20 @@
-import './Navbar.css';
+import { useEffect, useState } from 'react';
+//react ROUTER
 import { Link, useNavigate } from 'react-router-dom';
+
+//Styles
+import './Navbar.scss';
+
+//funciones de authenticacion
 import { getToken, getRoleFromToken, clearToken } from '../../utils/auth';
+
+//icons
 import Cart from '../../assets/icons/cart.svg';
 import Logo from '../../assets/images/logo.webp';
+
+//Componente de Carrousel title
 import CarrouselTitle from '../Header/CarrouselTitle/CarrouselTitle';
-import { useEffect, useState } from 'react';
+
 
 const Navbar = () => {
     const navigate = useNavigate();

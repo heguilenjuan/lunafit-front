@@ -68,7 +68,7 @@ const ProductDetail = () => {
 
         const token = getToken();
         if (!token) {
-            Swal.fire('Error', 'Debes estar autenticado para añadir productos al carrito.', 'error');
+            Swal.fire('Error', 'Inicia sesion para agregar al carrito.', 'error');
             return;
         }
 

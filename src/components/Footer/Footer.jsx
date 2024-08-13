@@ -1,4 +1,5 @@
-import './Footer.css'
+//React Router
+import { NavLink } from 'react-router-dom';
 
 //SVG
 import FacebookSvg from '../../assets/icons/facebook.svg';
@@ -8,7 +9,11 @@ import CashSvg from '../../assets/icons/cash.svg';
 import MpSvg from '../../assets/images/logo-mp.png';
 import PhoneSvg from '../../assets/icons/phone.svg';
 import MailSvg from '../../assets/icons/mail.svg';
-import { NavLink } from 'react-router-dom';
+
+
+//Styles
+import './Footer.scss';
+
 
 const Footer = () => {
     const phoneNumber = '+542914429530'; // Reemplaza con tu número de teléfono

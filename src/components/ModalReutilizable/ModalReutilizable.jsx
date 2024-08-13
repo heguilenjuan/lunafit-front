@@ -1,4 +1,4 @@
-import './ModalReutilizable.css';
+import './ModalReutilizable.scss';
 import CloseSvg from '../../assets/icons/close.svg'
 
 // eslint-disable-next-line react/prop-types

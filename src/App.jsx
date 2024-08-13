@@ -1,10 +1,11 @@
-import { Route, Routes } from 'react-router-dom';
 import { Suspense, lazy, useState, useEffect } from 'react';
-//vercel
+
+//React router DOM
+import { Route, Routes } from 'react-router-dom';
+
+//vercel analytics
 import { Analytics } from "@vercel/analytics/react";
 import { SpeedInsights } from "@vercel/speed-insights/react";
-//css
-import './App.css';
 
 //components
 import Header from './components/Header/Header';
@@ -15,14 +16,14 @@ import PublicRoute from './components/PrivateRoute/PublicRoute'
 import WhatsAppButton from './components/WhatsappButton/WhatsAppButton';
 import ModalReutilizable from './components/ModalReutilizable/ModalReutilizable';
 import PromoEdit from './assets/images/promoEdit.jpg';
-import ForgotPassword from './components/pages/user/ForgotPassword/Forgot-password';
-import ResetPassword from './components/pages/user/ResetPassword/ResetPassword';
 import Cart from './components/pages/Cart/Cart';
 import KnowUs from './components/pages/knowus/Knowus';
 import ChangePolicy from './components/pages/ChangePolicy/ChangePolicy';
+//COMPONETS CONNECT BACK
+import ResetPassword from './components/pages/user/ResetPassword/ResetPassword';
 import VerifyEmail from './components/pages/user/VerifyEmail/VerifyEmail';
-
-// Dynamically import components
+import ForgotPassword from './components/pages/user/ForgotPassword/Forgot-password';
+//IMPORTS DINAMICOS
 const Landing = lazy(() => import('./components/pages/Landing/Landing'));
 const ProductDetail = lazy(() => import('./components/pages/ProductDetail/ProductDetail'));
 const AllProducts = lazy(() => import('./components/pages/AllProduct/AllProduct'));
@@ -48,9 +49,7 @@ function App() {
 
   return (
     <>
-      <div className='topContent'>
-        <Header />
-      </div>
+      <Header />
       {isModalOpen && (
         <ModalReutilizable
           imageUrl={PromoEdit}
@@ -70,10 +69,10 @@ function App() {
           <Route path='/create-product' element={<PrivateRoute component={CreateProduct} requiredRole='admin' />} />
           <Route path='/forgot-password' element={<ForgotPassword />} />
           <Route path='/reset-password' element={<ResetPassword />} />
-          <Route path='/conocenos' element={<KnowUs/>}/>
-          <Route path='/change-policy' element={<ChangePolicy/>} />
+          <Route path='/conocenos' element={<KnowUs />} />
+          <Route path='/change-policy' element={<ChangePolicy />} />
           <Route path='/cart/:cartId' element={<PrivateRoute component={Cart} />} />
-          <Route path='/verify-email' element={<VerifyEmail/>} />
+          <Route path='/verify-email' element={<VerifyEmail />} />
         </Routes>
       </Suspense>
       <WhatsAppButton />

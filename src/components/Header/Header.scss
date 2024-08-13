@@ -1,0 +1,32 @@
+.headerContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+
+    .logo {
+        width: 8rem;
+        height: 8rem;
+        padding: 0;
+    }
+
+    @media (max-width:480px) {
+        .logo {
+            width: 6.5rem;
+            height: 6.5rem;
+        }
+
+        .headerContainer {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+    }
+}
+
+.infoGeneral {
+    margin-top: 10rem;
+}
