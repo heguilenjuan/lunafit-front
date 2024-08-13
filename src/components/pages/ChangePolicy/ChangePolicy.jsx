@@ -1,5 +1,4 @@
-import React from 'react';
-import './ChangePolicy.css'; // Asegúrate de crear este archivo CSS para los estilos
+import './ChangePolicy.scss'; // Asegúrate de crear este archivo CSS para los estilos
 
 const ChangePolicy = () => {
     return (

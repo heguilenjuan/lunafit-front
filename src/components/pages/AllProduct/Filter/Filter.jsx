@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 // Filter.js
 import { useEffect, useState } from "react";
-import './Filter.css';
+import './Filter.scss';
 
 const Filter = ({ filters, setFilters }) => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 480);

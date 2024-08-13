@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
 import CarrouselImage from "../../Carrousel/CarrouselImage"
 
-import './Landing.css'
+import './Landing.scss'
 
 import BannerProduct from '../../../assets/images/bannerProduct.png'
 const Landing = () => {

@@ -1,4 +1,4 @@
-import './Knowus.css';
+import './Knowus.scss';
 
 const KnowUs = () => {
     return (

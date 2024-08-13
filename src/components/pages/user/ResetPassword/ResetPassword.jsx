@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { fetchData } from '../../../../utils/api';
-import './ResetPassword.css';
+import './ResetPassword.scss';
 
 const ResetPassword = () => {
     const [password, setPassword] = useState('');

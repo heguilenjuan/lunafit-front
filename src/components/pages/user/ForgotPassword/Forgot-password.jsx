@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { fetchData } from '../../../../utils/api';
 import { Link } from 'react-router-dom';
-import './ForgotPassword.css';
+import './ForgotPassword.scss';
 
 const ForgotPassword = () => {
   const [mail, setEmail] = useState('');

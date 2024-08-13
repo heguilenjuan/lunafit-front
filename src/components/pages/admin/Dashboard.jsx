@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { fetchProducts, deleteProduct, updateProduct } from '../../../redux/productsSlice';
 //Style
-import './Dashboard.css';
+import './Dashboard.scss';
 
 //Components
 import Spinner from '../../Spinner/Spinner';
@@ -154,9 +154,9 @@ const Dashboard = () => {
             </div>
           ))}
           <div className="pagination">
-            <button onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Previous</button>
+            <button  className='btn' onClick={() => handlePageChange(page - 1)} disabled={page === 1}>Atras</button>
             <span>Page {page} of {totalPages}</span>
-            <button onClick={() => handlePageChange(page + 1)} disabled={page === totalPages}>Next</button>
+            <button className='btn' onClick={() => handlePageChange(page + 1)} disabled={page === totalPages} >Siguiente</button>
           </div>
         </div>
       )}

@@ -1,10 +1,18 @@
 /* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+
+//componenets
 import Spinner from "../../Spinner/Spinner";
+
+//utils
 import { fetchData } from "../../../utils/api";
 import { getToken } from "../../../utils/auth";
-import "./Cart.css";
+
+//Styles
+import "./Cart.scss";
+
+//icons
 import Trash from '../../../assets/icons/trash.svg';
 import Edit from '../../../assets/icons/edit.svg';
 

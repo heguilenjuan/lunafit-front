@@ -4,10 +4,12 @@ import { useLocation } from 'react-router-dom';
 import Spinner from '../../../Spinner/Spinner';
 import { fetchData } from '../../../../utils/api';
 import { useNavigate } from 'react-router-dom';
+import './VerifyEmail.scss'; // Asegúrate de importar el archivo SCSS
 
 const VerifyEmail = () => {
     const location = useLocation();
     const navigate = useNavigate();
+    
     useEffect(() => {
         const params = new URLSearchParams(location.search);
         const token = params.get('token');
@@ -47,10 +49,11 @@ const VerifyEmail = () => {
             alert('Error en la solicitud. Por favor, intente nuevamente.');
         }
     };
+    
     return (
-        <div>
+        <div className="verify-email-container">
             <h1>Verificando tu correo electrónico...</h1>
-            <Spinner />
+            <Spinner className="spinner" />
         </div>
     );
 };

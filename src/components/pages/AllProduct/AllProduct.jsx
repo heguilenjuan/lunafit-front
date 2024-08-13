@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../../redux/productsSlice";
-import "./AllProduct.css";
+import "./AllProduct.scss";
 import Card from '../../Card/Card';
 import Filter from "./Filter/Filter";
 import Spinner from "../../Spinner/Spinner";

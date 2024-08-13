@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { fetchProductById } from '../../../redux/productsSlice';
 import { addToCart } from '../../../redux/cartSlice';
-import './ProductDetail.css';
+import './ProductDetail.scss';
 import Whatsapp from '../../../assets/icons/whatsapp.svg';
 import Spinner from '../../Spinner/Spinner';
 

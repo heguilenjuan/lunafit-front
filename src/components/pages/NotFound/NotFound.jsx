@@ -1,4 +1,4 @@
-import './NotFound.css'; // Asegúrate de tener este archivo de estilos
+import './NotFound.scss'; // Asegúrate de tener este archivo de estilos
 import Logo from '../../../assets/images/logo.webp'
 const NotFound = () => {
     return (

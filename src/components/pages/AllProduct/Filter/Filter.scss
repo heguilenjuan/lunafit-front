@@ -2,29 +2,28 @@
     display: grid;
     grid-template-columns: 1fr;
     gap: 1rem;
-}
-
-.filter-section {
+  
+    @media (max-width: 480px) {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  .filter-section {
     display: flex;
     flex-direction: column;
-}
-
-.filter-subsection {
+  }
+  
+  .filter-subsection {
     margin-top: 1rem;
-}
-
-.filter-item {
+  }
+  
+  .filter-item {
     display: flex;
     align-items: center;
     margin-bottom: 0.5rem;
-}
-
-.filter-item input {
-    margin-right: 0.5rem;
-}
-
-@media (max-width: 480px) {
-    .filter-content {
-        grid-template-columns: 1fr 1fr;
+  
+    input {
+      margin-right: 0.5rem;
     }
-}
+  }
+  

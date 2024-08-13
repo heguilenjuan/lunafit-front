@@ -1,9 +1,14 @@
-import { useForm } from 'react-hook-form';
-import './CreateProduct.css';
 import { useState } from 'react';
+import { useForm } from 'react-hook-form';
+
+//styles
+import './CreateProduct.scss';
+//component
 import Spinner from '../../Spinner/Spinner';
-import { fetchData } from '../../../utils/api';
 import NavAdmin from '../admin/NavAdmin';
+
+//utils
+import { fetchData } from '../../../utils/api';
 
 const CreateProduct = () => {
     const [loading, setLoading] = useState(false);
@@ -59,9 +64,9 @@ const CreateProduct = () => {
     };
 
     return (
-        <>
+        <main className='section-create'>
             {loading ? <Spinner /> :
-                <div>
+                <>
                     <NavAdmin />
                     <div className='containerForm'>
                         <h1>Create Product</h1>
@@ -152,9 +157,9 @@ const CreateProduct = () => {
                             {serverError && <p className='error'>{serverError}</p>}
                         </form>
                     </div>
-                </div>
+                </>
             }
-        </>
+       </main>
     );
 };
 

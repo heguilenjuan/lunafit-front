@@ -1,6 +1,6 @@
 import { useForm } from "react-hook-form";
 import { NavLink, useNavigate } from "react-router-dom";
-import './Login.css';
+import './Login.scss';
 import { getRoleFromToken, setToken } from "../../../../utils/auth";
 import { fetchData } from "../../../../utils/api";
 import { useState } from "react";

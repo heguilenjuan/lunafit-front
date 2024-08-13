@@ -1,5 +1,5 @@
 /* eslint-disable no-unused-vars */
-import './Register.css';
+import './Register.scss';
 import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
