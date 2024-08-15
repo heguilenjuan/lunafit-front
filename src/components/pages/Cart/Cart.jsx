@@ -14,7 +14,6 @@ import "./Cart.scss";
 
 //icons
 import Trash from '../../../assets/icons/trash.svg';
-import Edit from '../../../assets/icons/edit.svg';
 
 const Cart = () => {
     const [product, setProduct] = useState(null);
@@ -137,6 +136,7 @@ const Cart = () => {
                     total: totalPrice, // Incluye el total del precio
                     items: product.items.map(item => ({
                         productId: item.productId._id,
+                        productName: item.productId.name,
                         quantity: item.quantity,
                         size: item.size,
                     })) // Incluye los detalles de los productos
