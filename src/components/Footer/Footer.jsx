@@ -67,11 +67,11 @@ const Footer = () => {
                 <div className='boxContact'>
                     <h3>Contactanos</h3>
                     <span>
-                        <img src={PhoneSvg} alt="phoneSvg" width={25} height={25} />
+                        <img src={PhoneSvg} alt="phoneSvg" width={20} height={20} />
                         <a href={whatsappUrl} target="_blank" rel="noopener noreferrer">+54 291 442 9530</a>
                     </span>
                     <span>
-                        <img src={MailSvg} alt="mailSvg" width={25} height={25} />
+                        <img src={MailSvg} alt="mailSvg" width={20} height={20} />
                         <a href={mailTo}>lunafitt@hotmail.com</a>
                     </span>
                 </div>

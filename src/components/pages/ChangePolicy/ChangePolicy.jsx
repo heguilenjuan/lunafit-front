@@ -15,15 +15,6 @@ const ChangePolicy = () => {
                     Solo se realizan cambios por <strong>falla de confección</strong> del mismo artículo, salvo excepciones como falta de stock del mismo. <strong>NO</strong> se realizan cambios por tallas.
                 </li>
                 <li>
-                    Todos los cambios se realizan en nuestras oficinas ubicadas en San Martín, Buenos Aires.
-                </li>
-                <li>
-                    En caso de no poder acercarse por cuestiones de lejanía y el producto se recibió con falla, nos hacemos cargo de los envíos de sucursal a sucursal del Correo Argentino o SIMPACK.
-                </li>
-                <li>
-                    Si falta algún producto, se enviará en el próximo pedido o podrá ser retirado en nuestras oficinas en San Martín. Si el comprador exige el envío, se hará a través del Correo Argentino o, en su defecto, se realizará la devolución del faltante.
-                </li>
-                <li>
                     La prenda requerida a cambio deberá devolverse en las siguientes condiciones:
                     <ul>
                         <li>Sin uso</li>
@@ -36,7 +27,7 @@ const ChangePolicy = () => {
                 </li>
             </ul>
             <p>
-                Para cualquier inconveniente o consulta, no dudes en ponerte en contacto con nosotros. ¡Estamos aquí para ayudarte! ♥ Gracias por elegirnos ♥
+                Para cualquier inconveniente o consulta, no dudes en ponerte en contacto con nosotros. ¡Estamos aquí para ayudarte!  Gracias por elegirnos !.
             </p>
         </div>
     );

@@ -23,6 +23,7 @@ import ChangePolicy from './components/pages/ChangePolicy/ChangePolicy';
 import ResetPassword from './components/pages/user/ResetPassword/ResetPassword';
 import VerifyEmail from './components/pages/user/VerifyEmail/VerifyEmail';
 import ForgotPassword from './components/pages/user/ForgotPassword/Forgot-password';
+import HowToBuy from './components/pages/HowToBuy/HowToBuy';
 //IMPORTS DINAMICOS
 const Landing = lazy(() => import('./components/pages/Landing/Landing'));
 const ProductDetail = lazy(() => import('./components/pages/ProductDetail/ProductDetail'));
@@ -73,6 +74,7 @@ function App() {
           <Route path='/change-policy' element={<ChangePolicy />} />
           <Route path='/cart/:cartId' element={<PrivateRoute component={Cart} />} />
           <Route path='/verify-email' element={<VerifyEmail />} />
+          <Route path='/howToBuy' element={<HowToBuy/>} />
         </Routes>
       </Suspense>
       <WhatsAppButton />
