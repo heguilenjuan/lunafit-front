@@ -55,6 +55,7 @@ const Navbar = () => {
     const navItems = [
         { text: "INICIO", to: '/' },
         { text: "PRODUCTOS", to: '/products' },
+        {text:"COMO COMPRAR", to:'/howToBuy'},
         { text: "QUIENES SOMOS", to: '/conocenos' },
         { text: "POLITICAS DE CAMBIO", to: '/change-policy' },
         ...(token ? (

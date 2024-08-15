@@ -4,12 +4,14 @@ import { useForm } from "react-hook-form";
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import { fetchData } from '../../../../utils/api';
+import ConfirmationModal from './Aviso/ConfirmationModal'; // Importa el modal
 
 const Register = () => {
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const navigate = useNavigate();
     const [errorMessage, setErrorMessage] = useState('');
     const [successMessage, setSuccessMessage] = useState('');
+    const [showModal, setShowModal] = useState(false); // Estado para controlar la visualización del modal
 
     const onSubmit = async (data) => {
         setErrorMessage('');
@@ -30,12 +32,18 @@ const Register = () => {
                 },
             });
 
-            setSuccessMessage('Usuario creado exitosamente');
+            setSuccessMessage('Usuario creado exitosamente.'); // Mensaje interno opcional
             reset();
-            navigate('/login');
+            setShowModal(true); // Muestra el modal
+
         } catch (error) {
             setErrorMessage(error.message || 'Error de red: no se pudo conectar con el servidor');
         }
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
+        navigate('/login'); // Redirige al login al cerrar el modal
     };
 
     return (
@@ -43,6 +51,7 @@ const Register = () => {
             <form onSubmit={handleSubmit(onSubmit)} className="formRegister">
                 <h2 className="formTitle">Crear Cuenta</h2>
                 
+                {/* Inputs del formulario */}
                 <input
                     placeholder="Nombre"
                     {...register("firstName", {
@@ -74,7 +83,7 @@ const Register = () => {
                     })}
                     className="inputRegister"
                 />
-                {errors.email && <span className="errorText">{errors.email.message}</span>}
+                {errors.mail && <span className="errorText">{errors.mail.message}</span>}
 
                 <input
                     placeholder="Contraseña"
@@ -147,8 +156,12 @@ const Register = () => {
                 ¿Ya tienes una cuenta? <Link to="/login">Inicia sesión aquí</Link>
             </div>
 
+            {/* Mensajes de éxito o error */}
             {errorMessage && <div className="errorMessage">{errorMessage}</div>}
             {successMessage && <div className="successMessage">{successMessage}</div>}
+
+            {/* Modal de confirmación */}
+            <ConfirmationModal show={showModal} onClose={handleCloseModal} />
         </main>
     );
 };

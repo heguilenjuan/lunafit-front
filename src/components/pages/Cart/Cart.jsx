@@ -1,9 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 
-//componenets
+//components
 import Spinner from "../../Spinner/Spinner";
+import OrderConfirmationModal from "./OrderConfirm/OrderConfirm";
 
 //utils
 import { fetchData } from "../../../utils/api";
@@ -22,8 +22,10 @@ const Cart = () => {
     const [editingItemId, setEditingItemId] = useState(null);
     const [newQuantity, setNewQuantity] = useState({});
     const [refresh, setRefresh] = useState(false); // Estado para forzar actualización
+    const [showModal, setShowModal] = useState(false); // Estado para mostrar el modal
     const { cartId } = useParams();
     const token = getToken();
+    const navigate = useNavigate(); // Hook para redirección
 
     useEffect(() => {
         const fetchCartData = async () => {
@@ -142,11 +144,18 @@ const Cart = () => {
             });
             if (result) {
                 console.log('Orden creada exitosamente');
-                // Aquí puedes redirigir al usuario o mostrar un mensaje de confirmación
+                setShowModal(true); // Muestra el modal de confirmación
+                setTimeout(() => {
+                    navigate('/'); // Redirige al usuario al inicio
+                }, 6000); // Espera 3 segundos antes de redirigir
             }
         } catch (error) {
             console.error('Error al crear la orden:', error);
         }
+    };
+
+    const handleCloseModal = () => {
+        setShowModal(false);
     };
 
     if (loading) {
@@ -223,6 +232,7 @@ const Cart = () => {
                     </button>
                 </>
             )}
+            <OrderConfirmationModal show={showModal} onClose={handleCloseModal} />
         </div>
     );
 };
